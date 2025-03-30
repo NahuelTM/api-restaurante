@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('./assets/Backgrounds/fondoPrincipal.png');
+  background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+  font-family: 'Roboto', sans-serif; /* Fuente predeterminada */
+}
