@@ -14,7 +14,18 @@ export default function LabelBottomNavigation() {
   };
 
   return (
-    <BottomNavigation sx={{ width: 500 }} value={value} onChange={handleChange}>
+    <BottomNavigation
+      sx={{
+        width: '100%',
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        zIndex: 1000,
+        justifyContent: 'center',
+      }}
+      value={value}
+      onChange={handleChange}
+    >
       <BottomNavigationAction
         label="Recents"
         value="recents"
