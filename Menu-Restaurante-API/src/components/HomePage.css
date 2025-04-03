@@ -1,0 +1,147 @@
+.home-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .home-container.loaded {
+    opacity: 1;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/background.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-name {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-name h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  .experience-text {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #e8a87c;
+    background: linear-gradient(to right, #e8a87c, #f1c27d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .country-name {
+    font-size: 5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+  
+  @media (max-width: 768px) {
+    .brand-name {
+      top: 30px;
+    }
+  
+    .experience-text {
+      font-size: 2rem;
+    }
+  
+    .country-name {
+      font-size: 3.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .brand-name {
+      top: 20px;
+    }
+  
+    .experience-text {
+      font-size: 1.5rem;
+    }
+  
+    .country-name {
+      font-size: 2.5rem;
+    }
+  }
+
+  .dish-card {
+    display: flex;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 20px auto;
+  }
+  
+  .dish-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+  
+  .dish-info {
+    color: white;
+  }
+  
+  .highlight {
+    color: #e8a87c;
+    font-weight: bold;
+  }
+  
+  
+  
