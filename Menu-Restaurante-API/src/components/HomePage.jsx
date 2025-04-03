@@ -18,14 +18,14 @@ export default function HomePage() {
 
       <div className="content">
         <div className="brand-name">
-          <h1>niquel.</h1>
+          <h1>niquel</h1>
         </div>
 
         <div className="hero-content">
           <h2 className="experience-text">Experiencia Culinaria</h2>
           <h3 className="country-name">Argentina</h3>
           <p className="tagline">
-            Vivi una experiencia única con
+            Viví una experiencia única con
             <br />
             nuestras creaciones de autor.
           </p>

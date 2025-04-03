@@ -235,7 +235,7 @@
   }
   
   .tagline {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     margin-top: 1rem;
     line-height: 1.6;
@@ -344,7 +344,9 @@
     justify-content: center;
     gap: 20px;
     padding: 10px 0;
-
+    flex-wrap: wrap; /* Permite que los elementos se ajusten horizontalmente */
+    align-items: center;
+   
   }
   
   .menu-nav a {
@@ -353,10 +355,40 @@
     color: white;
     font-family: 'Arial', sans-serif;
     transition: color 0.3s ease;
+    padding: 5px 10px; /* Mejor área de toque */
+    white-space: nowrap; /* Evita que el texto se corte */
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
   }
   
-  .menu-nav a:hover,
+  .menu-nav a:hover, 
   .menu-nav a.active {
     color: orange;
+  }
+  
+  /* Media query para pantallas medianas */
+  @media (max-width: 768px) {
+    .menu-nav {
+      gap: 15px; /* Reduce el espacio entre elementos */
+      justify-content: center;
+    }
+    
+    .menu-nav a {
+      font-size: 20px; /* Texto más pequeño */
+      padding: 8px 12px;
+    }
+  }
+  
+  /* Media query para pantallas pequeñas */
+  @media (max-width: 480px) {
+    .menu-nav {
+      gap: 10px; /* Reduce aún más el espacio */
+      padding: 8px 5px;
+      justify-content: space-around; /* Distribuye el espacio disponible */
+    }
+    
+    .menu-nav a {
+      font-size: 16px; /* Texto aún más pequeño */
+      padding: 6px 8px;
+    }
   }
   
