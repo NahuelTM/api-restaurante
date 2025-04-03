@@ -30,17 +30,105 @@ export default function HomePage() {
             nuestras creaciones de autor.
           </p>
         </div>
+      </div>
 
-        <div className="dish-card">
-          <img src="/tartar-salmon.jpg" alt="Tartar de Salmón" className="dish-image" />
-          <div className="dish-info">
-            <h3>Tartar de Salmón</h3>
-            <p>Salmon fresco con aguacate y caviar negro.</p>
-            <p><span className="highlight">Alérgenos:</span> Pescado, Moluscos, Lácteos.</p>
-            <p><span className="highlight">Precio:</span> $18,000</p>
+  <div class="menu-container">
+    <main class="menu-content">
+      <section class="menu-section">
+
+      <nav className="menu-nav">
+          <a href="#entrantes">Entrantes</a>
+          <a href="#ensaladas">Ensaladas</a>
+          <a href="#platos">Platos</a>
+          <a href="#postres">Postres</a>
+          <a href="#bebidas">Bebidas</a>
+        </nav>
+    
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" class="dish-image" alt="Carpaccio de Trufa" />
+          <div class="dish-info">
+            <h3>Carpaccio de Trufa</h3>
+            <p>Finas láminas de res con aceite de trufa y parmesano.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $20,000</p>
           </div>
         </div>
-      </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40" class="dish-image" alt="Burrata" />
+          <div class="dish-info">
+            <h3>Burrata</h3>
+            <p>Burrata cremosa con tomates y vinagreta balsámico.</p>
+            <p><span class="highlight">Alérgenos:</span> Lácteos.</p>
+            <p><span class="highlight">Precio:</span> $16,500</p>
+          </div>
+        </div>
+      </section>
     </main>
+  </div>
+    </main>
+
+    
   )
 }
