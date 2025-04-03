@@ -13,7 +13,7 @@ export default function LabelBottomNavigation() {
   return (
     <BottomNavigation
       sx={{
-        width: '30%', // Ajusta el ancho para que se asemeje al diseño
+        width: { xs: '90%', sm: '60%', md: '30%' }, // Ancho responsive: más ancho en pantallas pequeñas
         position: 'fixed',
         bottom: 10, // Margen inferior
         left: '50%',
