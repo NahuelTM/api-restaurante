@@ -36,7 +36,7 @@ export default function LabelBottomNavigation() {
         alt="Logo"
         style={{
           height: '32px', // Ajusta el tamaño del logo
-          marginRight: '16px', // Espaciado a la derecha
+          marginRight: '1px', // Espaciado a la derecha
         }}
       />
       {/* Opciones de navegación con estilos personalizados */}
