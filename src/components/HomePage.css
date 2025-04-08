@@ -1,0 +1,442 @@
+@import url('https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
+
+.home-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .home-container.loaded {
+    opacity: 1;
+  }
+  
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/background.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-name {
+    top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-name h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  .experience-text {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #e8a87c;
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .country-name {
+    font-size: 5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+  
+  @media (max-width: 768px) {
+    .brand-name {
+      top: 10px;
+    }
+  
+    .experience-text {
+      font-size: 3rem;
+    }
+  
+    .country-name {
+      font-size: 3.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .brand-name {
+      top: 10px;
+    }
+  
+    .experience-text {
+      font-size: 3rem;
+    }
+  
+    .country-name {
+      font-size: 2.5rem;
+    }
+  }
+
+  .dish-card {
+    display: flex;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 20px auto;
+  }
+  
+  .dish-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+  
+  .dish-info {
+    color: white;
+  }
+  
+  .highlight {
+    color: #e8a87c;
+    font-weight: bold;
+  }
+  
+  
+  /*MENU*/
+
+  .home-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .home-container.loaded {
+    opacity: 1;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url("/background.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-name {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-name h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: -40px;
+  }
+  
+  .experience-text {
+    font-family: "WindSong", serif;
+    font-weight: lighter;
+    font-size: 3rem;
+    margin: 0;
+    color: #e8a87c;
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .country-name {
+    font-size: 5rem;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  
+  .tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 0.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 600px;
+  }
+  
+  .menu-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 2rem 0;
+    background-color: black;
+  }
+  
+  .menu-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .menu-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1%;
+    gap: 2rem;
+  }
+  
+  .dish-card {
+    display: flex;
+    align-items: center;
+    background: rgba(26, 26, 26, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    backdrop-filter: blur(8px);
+  }
+  
+  .dish-image {
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+  
+  .dish-info {
+    color: white;
+  }
+  
+  .highlight {
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: lighter;
+  }
+
+  .menu-section h2 {
+    font-family: 'WindSong', serif;
+    font-size: 50px;
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .menu-section h3 {
+    font-weight: lighter;
+    border-bottom: 1px solid #e8a87c;
+
+  }
+
+  .menu-subtitle {
+    font-family: 'Chillax', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    margin: 30px 0 10px;
+    font-weight: 300;
+    
+  }
+  
+
+
+  .section-container {
+    max-width: 1200px; /* igual que .menu-content */
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /*FOOTER*/
+  
+  
+
+  /* BREAKPOINTS */
+
+  
+  @media (max-width: 768px) {
+    .brand-name {
+      top: 10px;
+    }
+  
+    .hero-content {
+      margin-top: -30px;
+    }
+  
+    .experience-text {
+      font-size: 2rem;
+    }
+  
+    .country-name {
+      font-size: 3.5rem;
+    }
+  
+    .dish-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .dish-image {
+      width: 100%;
+      height: 150px;
+      margin: 0 0 1rem 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .brand-name {
+      top: 10px;
+    }
+  
+    .hero-content {
+      margin-top: -20px;
+    }
+  
+    .experience-text {
+      font-size: 1.5rem;
+    }
+  
+    .country-name {
+      font-size: 2.5rem;
+    }
+  }
+
+  .menu-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten horizontalmente */
+    margin-bottom: 2%;
+    align-items: center;
+   
+  }
+  
+  .menu-nav a {
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    font-family: 'Chillax', sans-serif;
+    transition: color 0.3s ease;
+    padding: 5px 10px; /* Mejor área de toque */
+    white-space: nowrap; /* Evita que el texto se corte */
+  }
+  
+  .menu-nav a:hover,
+  .menu-nav a.active {
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+ 
+   
+  /* Media query para pantallas medianas */
+  @media (max-width: 768px) {
+    .menu-nav {
+      gap: 15px; /* Reduce el espacio entre elementos */
+      justify-content: center;
+    }
+    
+    .menu-nav a {
+      font-size: 20px; /* Texto más pequeño */
+      padding: 8px 12px;
+    }
+  }
+  
+  /* Media query para pantallas pequeñas */
+  @media (max-width: 480px) {
+    .menu-nav {
+      gap: 10px; /* Reduce aún más el espacio */
+      padding: 8px 5px;
+      justify-content: space-around; /* Distribuye el espacio disponible */
+    }
+    
+    .menu-nav a {
+      font-size: 16px; /* Texto aún más pequeño */
+      padding: 6px 8px;
+    }
+  }
+  
