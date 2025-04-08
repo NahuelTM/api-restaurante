@@ -6,7 +6,7 @@ body {
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
-  font-family: 'Roboto', sans-serif; /* Fuente predeterminada */
+  font-family: 'Chillax', sans-serif; /* Fuente predeterminada */
 }
 
 :root {

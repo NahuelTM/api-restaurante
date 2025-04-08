@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
 
 .home-container {
     position: relative;
@@ -42,7 +42,7 @@
   }
   
   .brand-name {
-    top: 40px;
+    top: 10px;
     width: 100%;
     text-align: center;
   }
@@ -70,7 +70,8 @@
     font-size: 3rem;
     margin-bottom: 0.5rem;
     color: #e8a87c;
-    background: linear-gradient(to right, #e8a87c, #f1c27d);
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -92,11 +93,11 @@
   
   @media (max-width: 768px) {
     .brand-name {
-      top: 30px;
+      top: 10px;
     }
   
     .experience-text {
-      font-size: 2rem;
+      font-size: 3rem;
     }
   
     .country-name {
@@ -106,11 +107,11 @@
   
   @media (max-width: 480px) {
     .brand-name {
-      top: 20px;
+      top: 10px;
     }
   
     .experience-text {
-      font-size: 1.5rem;
+      font-size: 3rem;
     }
   
     .country-name {
@@ -190,7 +191,7 @@
   
   .brand-name {
     position: absolute;
-    top: 40px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -216,20 +217,20 @@
   }
   
   .experience-text {
-    font-family: "Playfair Display", serif;
-    font-style: italic;
-    font-weight: 400;
+    font-family: "WindSong", serif;
+    font-weight: lighter;
     font-size: 3rem;
-    margin: 0 0 0.5rem 0;
+    margin: 0;
     color: #e8a87c;
-    background: linear-gradient(to right, #e8a87c, #f1c27d);
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   
   .country-name {
     font-size: 5rem;
-    font-weight: 700;
+    font-weight: 500;
     margin: 0;
     letter-spacing: 2px;
   }
@@ -237,7 +238,7 @@
   .tagline {
     font-size: 1.5rem;
     font-weight: 300;
-    margin-top: 1rem;
+    margin-top: 0.1rem;
     line-height: 1.6;
     opacity: 0.9;
     max-width: 600px;
@@ -260,6 +261,7 @@
   .menu-section {
     display: flex;
     flex-direction: column;
+    margin-top: 1%;
     gap: 2rem;
   }
   
@@ -271,13 +273,13 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
     backdrop-filter: blur(8px);
   }
   
   .dish-image {
     width: 100px;
-    height: 100px;
+    height: 150px;
     border-radius: 8px;
     object-fit: cover;
     margin-right: 15px;
@@ -288,13 +290,54 @@
   }
   
   .highlight {
-    color: #e8a87c;
-    font-weight: bold;
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: lighter;
   }
+
+  .menu-section h2 {
+    font-family: 'WindSong', serif;
+    font-size: 50px;
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .menu-section h3 {
+    font-weight: lighter;
+    border-bottom: 1px solid #e8a87c;
+
+  }
+
+  .menu-subtitle {
+    font-family: 'Chillax', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    margin: 30px 0 10px;
+    font-weight: 300;
+    
+  }
+  
+
+
+  .section-container {
+    max-width: 1200px; /* igual que .menu-content */
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /*FOOTER*/
+  
+  
+
+  /* BREAKPOINTS */
+
   
   @media (max-width: 768px) {
     .brand-name {
-      top: 30px;
+      top: 10px;
     }
   
     .hero-content {
@@ -316,14 +359,14 @@
   
     .dish-image {
       width: 100%;
-      height: 200px;
+      height: 150px;
       margin: 0 0 1rem 0;
     }
   }
   
   @media (max-width: 480px) {
     .brand-name {
-      top: 20px;
+      top: 10px;
     }
   
     .hero-content {
@@ -345,6 +388,7 @@
     gap: 20px;
     padding: 10px 0;
     flex-wrap: wrap; /* Permite que los elementos se ajusten horizontalmente */
+    margin-bottom: 2%;
     align-items: center;
    
   }
@@ -353,18 +397,22 @@
     text-decoration: none;
     font-size: 25px;
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Chillax', sans-serif;
     transition: color 0.3s ease;
     padding: 5px 10px; /* Mejor área de toque */
     white-space: nowrap; /* Evita que el texto se corte */
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
   }
   
-  .menu-nav a:hover, 
+  .menu-nav a:hover,
   .menu-nav a.active {
-    color: orange;
-  }
-  
+    background: linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+ 
+   
   /* Media query para pantallas medianas */
   @media (max-width: 768px) {
     .menu-nav {
