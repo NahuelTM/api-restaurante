@@ -151,7 +151,8 @@ body {
 
 .dish-card {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* para alinear la parte superior de la imagen y el texto */
+  gap: 15px; /* separación entre imagen y texto */
   background: rgba(26, 26, 26, 0.9);
   padding: 15px;
   border-radius: 10px;
@@ -161,13 +162,15 @@ body {
   backdrop-filter: blur(8px);
 }
 
+
 .dish-image {
   width: 150px;
   height: 150px;
   border-radius: 8px;
   object-fit: cover;
-  margin-right: 15px;
+  flex-shrink: 0;
 }
+
 
 .dish-info {
   color: white;
