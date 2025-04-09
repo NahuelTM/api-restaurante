@@ -16,23 +16,17 @@ export default function HomePage() {
 
       <main className={`home-container ${isLoaded ? "loaded" : ""}`}>
         <div className="overlay"></div>
-
         <div className="content">
-          <div className="brand-name">
-            <h1>niquel</h1>
-          </div>
-
           <div className="hero-content">
-            <h2 className="experience-text">Experiencia Culinaria</h2>
-            <h3 className="country-name">Argentina</h3>
+            <h2 className="experience-text">Descubre</h2>
+            <h3 className="country-name">niquel</h3>
             <p className="tagline">
-              Viví una experiencia única con nuestra cocteleria y restaurante de
-              autor.
+              Comida y tragos de selección, creaciones exlusivas.
             </p>
           </div>
         </div>
 
-        <div className="menu-container">
+        <div id="menu" className="menu-container">
           <main className="menu-content">
             <nav className="menu-nav">
               <a href="#entrantes">Entrantes</a>
