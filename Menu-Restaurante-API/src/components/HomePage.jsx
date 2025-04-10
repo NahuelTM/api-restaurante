@@ -53,7 +53,7 @@ export default function HomePage() {
             <h2 className="experience-text">Descubre</h2>
             <h3 className="country-name">niquel</h3>
             <p className="tagline">
-              Comida y tragos de selección, creaciones exlusivas.
+              Comida y tragos de selección, creaciones exclusivas.
             </p>
           </div>
         </div>
