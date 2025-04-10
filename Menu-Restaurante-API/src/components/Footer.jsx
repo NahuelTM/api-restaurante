@@ -13,13 +13,25 @@ export default function Footer() {
         position: "relative",
         zIndex: 2,
         borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-        width: "100%", // Asegura que el footer ocupe todo el ancho
-        boxSizing: "border-box", // Evita que el padding aumente el ancho
+        width: "100%", 
+        boxSizing: "border-box",
       }}
     >
       <Container maxWidth="lg">
         <Grid container spacing={4} justifyContent="center">
           {/* Logo y nombre */}
+          <Box sx={{ width: "36px" }}>
+          {}
+          <img
+            src="src\assets\Logos\Favicon3.ico"
+            alt="Logo Niquel"
+            style={{
+              width: "30px",
+              height: "30px",
+              objectFit: "contain",
+            }}
+          />
+        </Box>
           <Grid item xs={12} sm={6} md={3} sx={{ textAlign: { xs: "center", sm: "left" } }}>
             <Typography
               variant="h5"

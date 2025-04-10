@@ -1,33 +1,72 @@
 "use client"
-
-import * as React from "react"
+import { useEffect, useState } from "react"
 import BottomNavigation from "@mui/material/BottomNavigation"
 import Box from "@mui/material/Box"
-import Divider from "@mui/material/Divider"
-import { accordionDetailsClasses } from "@mui/material"
 
 export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState(null)
+  // Inicializar con null para que ninguna opción esté seleccionada al inicio
+  const [value, setValue] = useState(null)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
 
     // Scroll a la sección entrantes cuando se hace clic en "Menu"
     if (newValue === "menu") {
-      const entrantesSection = document.getElementById("menu")
-      if (entrantesSection) {
-        entrantesSection.scrollIntoView({ behavior: "smooth" })
+      const menuSection = document.getElementById("menu")
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: "smooth" })
       }
     }
 
-    // Scroll al footer cuando se hace clic en "Menu"
+    // Scroll al footer cuando se hace clic en "Nosotros"
     if (newValue === "nosotros") {
-      const footerSection = document.getElementById("footer")
-      if (footerSection) {
-        footerSection.scrollIntoView({ behavior: "smooth" })
+      const footerElement = document.querySelector("footer")
+      if (footerElement) {
+        footerElement.scrollIntoView({ behavior: "smooth" })
       }
     }
   }
+
+  // Usar scroll event para detectar la posición y actualizar la selección
+  useEffect(() => {
+    // Función para determinar qué sección está visible
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+
+      // Obtener las posiciones de las secciones
+      const heroSection = document.querySelector(".hero-content")
+      const menuSection = document.getElementById("menu")
+      const footerElement = document.querySelector("footer")
+
+      if (!heroSection || !menuSection || !footerElement) return
+
+      const heroRect = heroSection.getBoundingClientRect()
+      const menuRect = menuSection.getBoundingClientRect()
+      const footerRect = footerElement.getBoundingClientRect()
+
+      const heroTop = heroRect.top + window.scrollY
+      const heroBottom = heroRect.bottom + window.scrollY
+      const menuTop = menuRect.top + window.scrollY
+      const menuBottom = menuRect.bottom + window.scrollY
+      const footerTop = footerRect.top + window.scrollY
+
+      if (scrollPosition >= footerTop) {
+        setValue("nosotros")
+      } else if (scrollPosition >= menuTop && scrollPosition < footerTop) {
+        setValue("menu")
+      } else if (scrollPosition < menuTop) {
+        setValue(null)
+      }
+    }
+
+    handleScroll()
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   // Color naranja para los elementos seleccionados
   const orangeGradient = "linear-gradient(to right, #CA652D, #E89454, #FEB473, #E4884F)"
@@ -60,24 +99,18 @@ export default function LabelBottomNavigation() {
           padding: "0 15px",
         }}
       >
-        {/* Icono de copa a la izquierda */}
+        { /*Logo navbar*/}
         <Box sx={{ width: "36px", display: "flex", justifyContent: "center" }}>
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ color: "black" }}
-          >
-            <path
-              d="M8 22H16M12 17V22M17.5 2H6.5L7.5 9.5C7.5 11.5 9.5 13 12 13C14.5 13 16.5 11.5 16.5 9.5L17.5 2Z"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {}
+          <img
+            src="src\assets\Logos\Favicon3.ico"
+            alt="Logo Niquel"
+            style={{
+              width: "30px",
+              height: "30px",
+              objectFit: "contain",
+            }}
+          />
         </Box>
 
         {/* Sección central con opciones */}
@@ -87,6 +120,7 @@ export default function LabelBottomNavigation() {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
+            position: "relative",
           }}
         >
           {/* Opción Menu */}
@@ -111,14 +145,13 @@ export default function LabelBottomNavigation() {
             Menu
           </Box>
 
-          {/* Línea divisoria */}
-          <Divider
-            orientation="vertical"
-            flexItem
+          {/* Línea divisoria vertical - ahora como un elemento independiente */}
+          <Box
             sx={{
+              height: "20px", 
+              width: "1px", 
               backgroundColor: "rgba(128, 128, 128, 0.3)",
-              height: "60%",
-              margin: "0 5px",
+              margin: "0 10px",
             }}
           />
 

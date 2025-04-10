@@ -4,13 +4,45 @@ import { useState, useEffect } from "react";
 import "./HomePage.css";
 
 export default function HomePage() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoaded(true);
-    }, 300);
-  }, []);
+      setIsLoaded(true)
+    }, 300)
+
+    const handleMenuClick = (e) => {
+      const href = e.target.getAttribute("href")
+      if (href && href.startsWith("#")) {
+        e.preventDefault()
+        const targetId = href.substring(1)
+        const targetElement = document.getElementById(targetId)
+
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+
+          // Actualizar la URL sin recargar la página
+          window.history.pushState(null, "", href)
+        }
+      }
+    }
+
+    // Agregar el evento a todos los enlaces del menú
+    const menuLinks = document.querySelectorAll(".menu-nav a")
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", handleMenuClick)
+    })
+
+    // Limpieza al desmontar el componente
+    return () => {
+      menuLinks.forEach((link) => {
+        link.removeEventListener("click", handleMenuClick)
+      })
+    }
+  }, []) // El array vacío asegura que esto solo se ejecute una vez al montar el componente
 
   return (
 
