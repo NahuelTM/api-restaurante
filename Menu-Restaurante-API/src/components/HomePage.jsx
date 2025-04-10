@@ -40,26 +40,52 @@ export default function HomePage() {
             <section key={section.id} id={section.id} className="menu-section">
               <div className="section-container">
                 <h2>{section.title}</h2>
-                {section.dishes.map((dish, index) => (
-                  <div key={index} className="dish-card">
-                    <img
-                      src={dish.image}
-                      className="dish-image"
-                      alt={dish.name}
-                    />
-                    <div className="dish-info">
-                      <h3>{dish.name}</h3>
-                      <p>{dish.description}</p>
-                      <p>
-                        <span className="highlight">Alérgenos:</span>{" "}
-                        {dish.allergens}
-                      </p>
-                      <p>
-                        <span className="highlight">Precio:</span> {dish.price}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {section.subsections
+                  ? section.subsections.map((subsection, subIndex) => (
+                      <div key={subIndex}>
+                        <h3 className="menu-subtitle">{subsection.subtitle}</h3>
+                        {subsection.dishes.map((dish, index) => (
+                          <div key={index} className="dish-card">
+                            <img
+                              src={dish.image}
+                              className="dish-image"
+                              alt={dish.name}
+                            />
+                            <div className="dish-info">
+                              <h3>{dish.name}</h3>
+                              <p>{dish.description}</p>
+                              <p>
+                                <span className="highlight">Alérgenos:</span>{" "}
+                                {dish.allergens}
+                              </p>
+                              <p>
+                                <span className="highlight">Precio:</span> {dish.price}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))
+                  : section.dishes.map((dish, index) => (
+                      <div key={index} className="dish-card">
+                        <img
+                          src={dish.image}
+                          className="dish-image"
+                          alt={dish.name}
+                        />
+                        <div className="dish-info">
+                          <h3>{dish.name}</h3>
+                          <p>{dish.description}</p>
+                          <p>
+                            <span className="highlight">Alérgenos:</span>{" "}
+                            {dish.allergens}
+                          </p>
+                          <p>
+                            <span className="highlight">Precio:</span> {dish.price}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
               </div>
             </section>
           ))}
