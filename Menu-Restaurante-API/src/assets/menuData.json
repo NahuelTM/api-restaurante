@@ -1,0 +1,207 @@
+[
+  {
+    "id": "entrantes",
+    "title": "Entrantes",
+    "dishes": [
+      {
+        "name": "Tartar de Salmón",
+        "description": "Salmón fresco con aguacate y caviar negro.",
+        "allergens": "Pescado, Moluscos, Lácteos",
+        "price": "$20,000",
+        "image": "src/assets/Imagenes/entrantes/tartarDeSalmon.jpg"
+      },
+      {
+        "name": "Carpaccio de Trufa",
+        "description": "Finas láminas de res con aceite de trufa y parmesano.",
+        "allergens": "Lácteos",
+        "price": "$16,500",
+        "image": "src/assets/Imagenes/entrantes/carpaccioDeRes.jpg"
+      },
+      {
+        "name": "Burrata",
+        "description": "Burrata cremosa con tomates y vinagreta balsámico.",
+        "allergens": "Lácteos",
+        "price": "$16,500",
+        "image": "src/assets/Imagenes/entrantes/burrata.jpg"
+      }
+    ]
+  },
+  {
+    "id": "ensaladas",
+    "title": "Ensaladas",
+    "dishes": [
+      {
+        "name": "Langosta y Pomelo",
+        "description": "Langosta, pomelo y vinagreta de miel y mostaza.",
+        "allergens": "Mariscos, Mostaza",
+        "price": "$22,500",
+        "image": "src/assets/Imagenes/ensaladas/ensaladaLangostaPomelo.jpg"
+      },
+      {
+        "name": "Quinoa y Granada",
+        "description": "Quinoa, verduras asadas y semillas de granada.",
+        "allergens": "Ninguno",
+        "price": "$16,500",
+        "image": "src/assets/Imagenes/ensaladas/quinoaGranada.jpg"
+      },
+      {
+        "name": "Capresse",
+        "description": "Tomates frescos, mozzarella de búfala, y albahaca.",
+        "allergens": "Lácteos",
+        "price": "$18,500",
+        "image": "src/assets/Imagenes/ensaladas/capresse.jpg"
+      }
+    ]
+  },
+  {
+    "id": "platos",
+    "title": "Platos",
+    "dishes": [
+      {
+        "name": "Filete de Res",
+        "description": "Filete de res con salsa de vino tinto y puré de trufas.",
+        "allergens": "Lácteos, Sulfitos",
+        "price": "$36,500",
+        "image": "src/assets/Imagenes/Platos/fileteDeRes.jpg"
+      },
+      {
+        "name": "Costillas de Cordero",
+        "description": "Costillas asadas con reducción de romero y papas gratinadas.",
+        "allergens": "Lácteos",
+        "price": "$30,500",
+        "image": "src/assets/Imagenes/Platos/costillasDeCordero.jpg"
+      },
+      {
+        "name": "Pechuga de Pato",
+        "description": "Pato con salsa de oporto y frutos rojos.",
+        "allergens": "Sulfitos",
+        "price": "$28,500",
+        "image": "src/assets/Imagenes/Platos/pechugaDePato.jpg"
+      },
+      {
+        "name": "Pollo de Corral",
+        "description": "Pollo asado con salsa de limón y espárragos.",
+        "allergens": "Ninguno",
+        "price": "$18,500",
+        "image": "src/assets/Imagenes/Platos/polloDeCorral.jpg"
+      },
+      {
+        "name": "Lubina con Azafrán",
+        "description": "Lubina con espárragos y salsa de azafrán.",
+        "allergens": "Pescado",
+        "price": "$24,500",
+        "image": "src/assets/Imagenes/Platos/lubina.jpg"
+      },
+      {
+        "name": "Trucha y Alcaparras",
+        "description": "Trucha con mantequilla de limón y alcaparras.",
+        "allergens": "Lácteos",
+        "price": "$26,400",
+        "image": "src/assets/Imagenes/Platos/truchaAlcaparras.jpg"
+      },
+      {
+        "name": "Tagliatelle con Trufa",
+        "description": "Pasta fresca con salsa de trufa y parmesano.",
+        "allergens": "Gluten, Lácteos",
+        "price": "$22,700",
+        "image": "src/assets/Imagenes/Pastas/tagliatelleTrufas.jpg"
+      },
+      {
+        "name": "Ravioli Ricotta y Espinaca",
+        "description": "Ravioli con salsa de mantequilla y salvia.",
+        "allergens": "Gluten, Lácteos",
+        "price": "$21,500",
+        "image": "src/assets/Imagenes/Pastas/ravioli.jpg"
+      }
+    ]
+  },
+  {
+    "id": "postres",
+    "title": "Postres",
+    "dishes": [
+      {
+        "name": "Mousse Chocolate",
+        "description": "Mousse de chocolate con frambuesas frescas.",
+        "allergens": "Lácteos, Soja",
+        "price": "$15,500",
+        "image": "src/assets/Imagenes/Postres/mouseChocolate.jpg"
+      },
+      {
+        "name": "Lemon Pie",
+        "description": "Tarta de limón con base de almendra.",
+        "allergens": "Gluten, Frutos secos, Lácteos",
+        "price": "$13,500",
+        "image": "src/assets/Imagenes/Postres/lemonPie.jpg"
+      },
+      {
+        "name": "Macarons de Pistacho y Frambuesa",
+        "description": "Macarons rellenos de pistacho y frambuesa.",
+        "allergens": "Lácteos",
+        "price": "$12,200",
+        "image": "src/assets/Imagenes/Postres/macarronesPistacchio.jpg"
+      }
+    ]
+  },
+  {
+    "id": "bebidas",
+    "title": "Bebidas",
+    "dishes": [
+      {
+        "name": "Atelier Martini",
+        "description": "Gin, vermouth seco y esencia cítrica artesana.",
+        "allergens": "Ninguno",
+        "price": "$10,500",
+        "image": "src/assets/Imagenes/Tragos/atelierMartini.jpg"
+      },
+      {
+        "name": "Nocturno Spritz",
+        "description": "Aperol, espumante rosado, frutos rojos y albahaca fresca.",
+        "allergens": "Ninguno",
+        "price": "$11,500",
+        "image": "src/assets/Imagenes/Tragos/nocturnoSpritz.png"
+      },
+      {
+        "name": "Brisa del Plata",
+        "description": "Vodka Grey Goose, lima fresca y almíbar de jazmín.",
+        "allergens": "Ninguno",
+        "price": "$15,500",
+        "image": "src/assets/Imagenes/Tragos/brisaDelPlata.png"
+      },
+      {
+        "name": "Negroni Reserva",
+        "description": "Gin, vermouth seco y esencia cítrica artesanal.",
+        "allergens": "Ninguno",
+        "price": "$10,500",
+        "image": "src/assets/Imagenes/Tragos/negroniReserva.jpg"
+      },
+      {
+        "name": "Golden Mule",
+        "description": "Aperol, espumante rosado, frutos rojos y albahaca fresca.",
+        "allergens": "Ninguno",
+        "price": "$11,500",
+        "image": "src/assets/Imagenes/Tragos/goldenMule.jpg"
+      },
+      {
+        "name": "Limonada Fizz",
+        "description": "Limonada con un toque de menta fresca y jengibre.",
+        "allergens": "Ninguno",
+        "price": "$9,500",
+        "image": "src/assets/Imagenes/BebidasSinAlcohol/limonadaFizz.jpg"
+      },
+      {
+        "name": "Agua Manantial",
+        "description": "Agua mineral premium de los Andes.",
+        "allergens": "Ninguno",
+        "price": "$3,500",
+        "image": "src/assets/Imagenes/BebidasSinAlcohol/aguaManantial.jpg"
+      },
+      {
+        "name": "Gaseosa",
+        "description": "Exclusiva selección de gaseosas de Coca-Cola.",
+        "allergens": "Ninguno",
+        "price": "$5,500",
+        "image": "src/assets/Imagenes/BebidasSinAlcohol/gaseosas.jpg"
+      }
+    ]
+  }
+]
