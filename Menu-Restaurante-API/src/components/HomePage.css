@@ -260,13 +260,15 @@ body {
   font-size: 25px;
   color: white;
   font-family: "Chillax", sans-serif;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease; /* Transición suave para todos los cambios */
   padding: 5px 10px;
   white-space: nowrap;
+  position: relative;
+  display: inline-block; /* Añadido para mejor manejo de transform */
 }
 
-.menu-nav a:hover,
-.menu-nav a.active {
+.menu-nav a:hover {
+  transform: scale(1.1); /* Aumenta el tamaño en un 10% al pasar el mouse */
   background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
   background-clip: text;
   -webkit-background-clip: text;
