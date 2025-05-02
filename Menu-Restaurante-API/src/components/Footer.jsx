@@ -19,19 +19,6 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Grid container spacing={4} justifyContent="center">
-          {/* Logo y nombre */}
-          <Box sx={{ width: "36px" }}>
-          {}
-          <img
-            src="src\assets\Logos\Favicon3.ico"
-            alt="Logo Niquel"
-            style={{
-              width: "30px",
-              height: "30px",
-              objectFit: "contain",
-            }}
-          />
-        </Box>
           <Grid item xs={12} sm={6} md={3} sx={{ textAlign: { xs: "center", sm: "left" } }}>
             <Typography
               variant="h5"
