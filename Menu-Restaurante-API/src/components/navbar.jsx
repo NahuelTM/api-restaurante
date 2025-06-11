@@ -4,7 +4,7 @@ import BottomNavigation from "@mui/material/BottomNavigation"
 import Box from "@mui/material/Box"
 
 export default function LabelBottomNavigation() {
-  // Inicializar con null para que ninguna opción esté seleccionada al inicio
+  // Inicializamos con null para que ninguna opción esté seleccionada al inicio
   const [value, setValue] = useState(null)
 
   const handleChange = (event, newValue) => {
