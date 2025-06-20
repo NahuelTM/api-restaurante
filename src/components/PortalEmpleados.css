@@ -1,0 +1,247 @@
+/* CONTAINER */
+.portal-container {
+  min-height: 100vh;
+  background-color: #000;
+  background-image: url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-qbU7lxJbAqBtxKPoeD2dTn31Rym8sj.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  position: relative;
+}
+
+.portal-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.portal-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* NAVBAR */
+.portal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.portal-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  color: #fb923c;
+}
+
+.header-login-link {
+  color: #fb923c !important;
+}
+
+.portal-user-info {
+  display: flex;
+  align-items: center;
+}
+
+/* BRAND */
+.portal-brand {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.portal-brand h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin: 0;
+  color: #fff;
+}
+
+/* MAIN CONTENT */
+.portal-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+}
+
+.portal-content {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.portal-title {
+  font-size: 3.5rem;
+  font-family: cursive;
+  color: #fb923c;
+  margin: 0 0 1rem 0;
+  font-weight: 400;
+}
+
+.portal-subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0 0 3rem 0;
+  font-weight: 300;
+}
+
+.portal-divider {
+  width: 300px;
+  height: 1px;
+  background-color: #fb923c;
+  margin: 0 auto 3rem auto;
+}
+
+/* BUTTONS */
+.portal-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.portal-button {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 280px;
+}
+
+.portal-button-primary {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #fff;
+}
+
+.portal-button-primary:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.portal-button-secondary {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.portal-button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* BACK BUTTON */
+.portal-back {
+  margin-top: 2rem;
+}
+
+.portal-back-button {
+  background: none;
+  border: 1px solid #fb923c;
+  color: #fb923c;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.portal-back-button:hover {
+  background-color: #fb923c;
+  color: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .portal-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .portal-links.open {
+    display: flex;
+  }
+
+  .portal-title {
+    font-size: 2.5rem;
+  }
+
+  .portal-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .portal-buttons {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .portal-button {
+    min-width: 250px;
+  }
+
+  .portal-divider {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .portal-title {
+    font-size: 2rem;
+  }
+
+  .portal-button {
+    min-width: 200px;
+    padding: 0.875rem 2rem;
+    font-size: 0.875rem;
+  }
+}
