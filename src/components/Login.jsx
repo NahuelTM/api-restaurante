@@ -1,5 +1,6 @@
 "use client"
 
+import { Link } from "react-router-dom"
 import { useState } from "react"
 import "./Login.css"
 
@@ -58,7 +59,7 @@ export default function Login({ onLogin }) {
         <div className={`login-links ${menuAbierto ? "open" : ""}`}>
           <a href="/menu">Menu</a>
           <a href="/restaurante">Restaurante</a>
-          <a href="/PortalEmpleados">Portal</a>
+          <Link to="/portal">Portal</Link>
           <a href="/Login" className="header-login-link">Iniciar sesión</a>
         </div>
 

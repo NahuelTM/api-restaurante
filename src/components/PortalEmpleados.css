@@ -1,14 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=WindSong&display=swap");
+@import url('https://fonts.cdnfonts.com/css/chillax');
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Great+Vibes&family=Tangerine:wght@400;700&display=swap');
+
 /* CONTAINER */
-.portal-container {
-  min-height: 100vh;
-  background-color: #000;
-  background-image: url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-qbU7lxJbAqBtxKPoeD2dTn31Rym8sj.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #fff;
-  position: relative;
-}
+
 
 .portal-container::before {
   content: "";
@@ -17,7 +14,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6); /* Opacidad ajustable */
   z-index: 1;
 }
 
@@ -102,11 +99,17 @@
 }
 
 .portal-title {
-  font-size: 3.5rem;
-  font-family: cursive;
-  color: #fb923c;
-  margin: 0 0 1rem 0;
-  font-weight: 400;
+  font-family: "Great Vibes", cursive;
+  font-weight: lighter;
+  margin: 0;
+  margin-bottom: -2.3rem;
+  color: #e8a87c;
+  font-size: 5.7rem;
+  margin: 0 0 3rem 0;
+  background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .portal-subtitle {
@@ -125,6 +128,7 @@
 
 /* BUTTONS */
 .portal-buttons {
+  font-family: 'Chillax', sans-serif;
   display: flex;
   gap: 2rem;
   justify-content: center;
@@ -143,6 +147,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   min-width: 280px;
+  font-family: 'Chillax', sans-serif;
 }
 
 .portal-button-primary {
@@ -236,7 +241,7 @@
 
 @media (max-width: 480px) {
   .portal-title {
-    font-size: 2rem;
+    font-size: 3.5rem;
   }
 
   .portal-button {
@@ -245,3 +250,18 @@
     font-size: 0.875rem;
   }
 }
+
+.menu-toggle {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+a.portal-button {
+  text-decoration: none;
+}
+
