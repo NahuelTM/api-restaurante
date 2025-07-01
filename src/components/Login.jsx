@@ -3,14 +3,22 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import "./Login.css"
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
-export default function Login({ onLogin }) {
+
+  export default function Login({ onLogin }) {
   const [nombre, setNombre] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [ok, setOk] = useState(false)
   const [loading, setLoading] = useState(false)
   const [menuAbierto, setMenuAbierto] = useState(false)
+
+
+  const navigate = useNavigate()
+
+  
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -30,6 +38,7 @@ export default function Login({ onLogin }) {
       if (res.ok) {
         localStorage.setItem("token", data.token)
         setOk(true)
+        navigate("/portal")
         onLogin?.()
       } else {
         setError(data.error || "Error al iniciar sesión")
@@ -46,8 +55,6 @@ export default function Login({ onLogin }) {
     <div className="login-container">
       {/* NAVBAR */}
       <nav className="login-nav">
-        
-
         <button
           className="menu-toggle"
           onClick={() => setMenuAbierto(!menuAbierto)}
@@ -58,10 +65,8 @@ export default function Login({ onLogin }) {
 
         <div className={`login-links ${menuAbierto ? "open" : ""}`}>
           <a href="/menu">Menu</a>
-          <a href="/restaurante">Restaurante</a>
-          <Link to="/portal">Portal</Link>
-          <a href="/Login" className="header-login-link">Iniciar sesión</a>
-        </div>
+       {/*  <a href="/Login" className="header-login-link">Iniciar sesión</a>} */}
+        </div> 
 
         <div className="login-user-info">
           <img
@@ -128,6 +133,8 @@ export default function Login({ onLogin }) {
 
         {/* DIVIDER */}
         <div className="login-divider" />
+
+
 
         {/* RIGHT INFO */}
         <div className="login-info">

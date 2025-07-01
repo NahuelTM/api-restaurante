@@ -5,8 +5,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Great+Vibes&family=Tangerine:wght@400;700&display=swap');
 
 /* CONTAINER */
-
-
 .portal-container::before {
   content: "";
   position: absolute;
@@ -14,7 +12,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Opacidad ajustable */
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
 
@@ -33,11 +31,13 @@
 
 .menu-toggle {
   display: none;
-  background: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
   border: none;
-  color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
 }
 
 .portal-links {
@@ -47,18 +47,46 @@
 }
 
 .nav-button {
-  background: none;
+ background: none;
   border: none;
-  color: #fff;
-  text-decoration: none;
+  color: #000;
+  font-family: 'Chillax', sans-serif;
   font-size: 0.875rem;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
   cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0;
+  text-align: center;
 }
 
 .nav-button:hover {
   color: #fb923c;
 }
+
+.logout-button {
+  font-family: 'Chillax', sans-serif;
+  font-size: 0.875rem;
+  color: #000;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  display: inline-block;
+}
+
+.logout-button:hover {
+  color: #fb923c;
+}
+
+
+
+
 
 .header-login-link {
   color: #fb923c !important;
@@ -68,6 +96,7 @@
   display: flex;
   align-items: center;
 }
+
 
 /* BRAND */
 .portal-brand {
@@ -195,6 +224,19 @@
   color: #000;
 }
 
+a.portal-button {
+  text-decoration: none;
+}
+
+/* Visibilidad por tipo de pantalla */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: inline-block;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .menu-toggle {
@@ -237,6 +279,18 @@
   .portal-divider {
     width: 200px;
   }
+
+  .mobile-only {
+    display: inline-block;
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    color: #fff;
+  }
+
+  .desktop-only {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -250,18 +304,3 @@
     font-size: 0.875rem;
   }
 }
-
-.menu-toggle {
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-}
-
-a.portal-button {
-  text-decoration: none;
-}
-

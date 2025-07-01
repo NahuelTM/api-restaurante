@@ -76,8 +76,8 @@ export default function AdminTest() {
           <a href="/menu">Menu</a>
           <a href="/restaurante">Restaurante</a>
           <a href="/PortalEmpleados">Portal</a>
-          <a href="/Login" className="header-login-link">Iniciar sesión</a>
-        </div>
+         {/* <a href="/Login" className="header-login-link">Iniciar sesión</a> */}
+         </div>
 
         <div className="login-user-info">
           <img
