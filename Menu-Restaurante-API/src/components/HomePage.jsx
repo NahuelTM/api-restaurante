@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./HomePage.css";
+import styles from "./HomePage.module.css";
 
 export default function HomePage() {
   const [platos, setPlatos] = useState([]);
@@ -7,8 +7,7 @@ export default function HomePage() {
   const [selectedDish, setSelectedDish] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/platos?disponible=true", {
-    })
+    fetch("http://localhost:3001/api/platos?disponible=true", {})
       .then((res) => res.json())
       .then((data) => {
         setPlatos(data);
@@ -34,21 +33,21 @@ export default function HomePage() {
   const closeModal = () => setSelectedDish(null);
 
   return (
-    <main className={`home-container ${isLoaded ? "loaded" : ""}`}>
-      <div className="overlay"></div>
-      <div className="content">
-        <div className="hero-content">
-          <h2 className="experience-text">Descubre</h2>
-          <h3 className="country-name">niquel</h3>
-          <p className="tagline">
+    <main className={`${styles["home-container"]} ${isLoaded ? styles.loaded : ""}`}>
+      <div className={styles.overlay}></div>
+      <div className={styles.content}>
+        <div className={styles["hero-content"]}>
+          <h2 className={styles["experience-text"]}>Descubre</h2>
+          <h3 className={styles["country-name"]}>niquel</h3>
+          <p className={styles.tagline}>
             Comida y tragos de selección, creaciones exclusivas.
           </p>
         </div>
       </div>
 
-      <div id="menu" className="menu-container">
-        <main className="menu-content">
-          <nav className="menu-nav">
+      <div id="menu" className={styles["menu-container"]}>
+        <main className={styles["menu-content"]}>
+          <nav className={styles["menu-nav"]}>
             {Object.keys(categorias).map((cat) => (
               <a key={cat} href={`#${cat.replace(/\s/g, "").toLowerCase()}`}>
                 {cat}
@@ -60,36 +59,36 @@ export default function HomePage() {
             <section
               key={cat}
               id={cat.replace(/\s/g, "").toLowerCase()}
-              className="menu-section"
+              className={styles["menu-section"]}
             >
-              <div className="section-container">
+              <div className={styles["section-container"]}>
                 <h2>{cat}</h2>
                 {Object.keys(subs).length > 1
                   ? Object.entries(subs).map(([subcat, platosArr]) => (
                       <div key={subcat || "sin-subcategoria"}>
                         {subcat && (
-                          <h3 className="menu-subtitle">{subcat}</h3>
+                          <h3 className={styles["menu-subtitle"]}>{subcat}</h3>
                         )}
                         {platosArr.map((dish) => (
                           <div
                             key={dish.id}
-                            className="dish-card"
+                            className={styles["dish-card"]}
                             onClick={() => handleDishClick(dish)}
                           >
                             <img
                               src={dish.imagen}
-                              className="dish-image"
+                              className={styles["dish-image"]}
                               alt={dish.nombre}
                             />
-                            <div className="dish-info">
+                            <div className={styles["dish-info"]}>
                               <h3>{dish.nombre}</h3>
                               <p>{dish.descripcion}</p>
                               <p>
-                                <span className="highlight">Alérgenos:</span>{" "}
+                                <span className={styles.highlight}>Alérgenos:</span>{" "}
                                 {dish.alergenos}
                               </p>
                               <p>
-                                <span className="highlight">Precio:</span> ${dish.precio}
+                                <span className={styles.highlight}>Precio:</span> ${dish.precio}
                               </p>
                             </div>
                           </div>
@@ -100,23 +99,23 @@ export default function HomePage() {
                       platosArr.map((dish) => (
                         <div
                           key={dish.id}
-                          className="dish-card"
+                          className={styles["dish-card"]}
                           onClick={() => handleDishClick(dish)}
                         >
                           <img
                             src={dish.imagen}
-                            className="dish-image"
+                            className={styles["dish-image"]}
                             alt={dish.nombre}
                           />
-                          <div className="dish-info">
+                          <div className={styles["dish-info"]}>
                             <h3>{dish.nombre}</h3>
                             <p>{dish.descripcion}</p>
                             <p>
-                              <span className="highlight">Alérgenos:</span>{" "}
+                              <span className={styles.highlight}>Alérgenos:</span>{" "}
                               {dish.alergenos}
                             </p>
                             <p>
-                              <span className="highlight">Precio:</span> ${dish.precio}
+                              <span className={styles.highlight}>Precio:</span> ${dish.precio}
                             </p>
                           </div>
                         </div>
@@ -130,25 +129,25 @@ export default function HomePage() {
 
       {/* Modal para mostrar el plato seleccionado */}
       {selectedDish && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-button" onClick={closeModal}>
+        <div className={styles["modal-overlay"]} onClick={closeModal}>
+          <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+            <button className={styles["close-button"]} onClick={closeModal}>
               &times;
             </button>
             <img
               src={selectedDish.imagen}
               alt={selectedDish.nombre}
-              className="modal-image"
+              className={styles["modal-image"]}
             />
-            <div className="modal-info">
+            <div className={styles["modal-info"]}>
               <h3>{selectedDish.nombre}</h3>
               <p>{selectedDish.descripcion}</p>
               <p>
-                <span className="highlight">Alérgenos:</span>{" "}
+                <span className={styles.highlight}>Alérgenos:</span>{" "}
                 {selectedDish.alergenos}
               </p>
               <p>
-                <span className="highlight">Precio:</span> ${selectedDish.precio}
+                <span className={styles.highlight}>Precio:</span> ${selectedDish.precio}
               </p>
             </div>
           </div>

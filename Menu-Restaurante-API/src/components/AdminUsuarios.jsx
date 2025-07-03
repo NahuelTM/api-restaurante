@@ -186,11 +186,7 @@ export default function AdminUsuarios() {
 
         <div className={`login-links ${menuAbierto ? "open" : ""}`}>
           <a href="/menu">Menu</a>
-          <a href="/restaurante">Restaurante</a>
           <Link to="/portal">Portal</Link>
-          <a href="/Login" className="header-login-link">
-            Iniciar sesión
-          </a>
         </div>
 
         <div className="login-user-info">
