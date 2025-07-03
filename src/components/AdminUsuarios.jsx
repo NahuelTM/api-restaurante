@@ -208,10 +208,8 @@ export default function AdminUsuarios() {
 
       {/* CONTENIDO ADMIN */}
       <div className="admin-content">
+         <div className="card-header"><h2> Administración de Usuarios</h2></div>
         <div className="admin-card">
-          <div className="card-header">
-            <h2>👤 Administración de Usuarios</h2>
-          </div>
 
           <div className="card-content">
             {!token ? (
@@ -224,7 +222,7 @@ export default function AdminUsuarios() {
               <>
                 {/* HEADER CON BOTONES */}
                 <div className="section-header">
-                  <h3>Usuarios registrados ({usuarios.length})</h3>
+                  <h3>👤Usuarios registrados ({usuarios.length})</h3>
                   <button className="btn btn-primary" onClick={() => setModalAgregarAbierto(true)}>
                     ➕ Agregar Usuario
                   </button>
