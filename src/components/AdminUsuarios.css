@@ -71,7 +71,8 @@
   font-size: 3rem;
   display: flex;
   justify-content: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
+  margin-top: 50px;
   color: #e8a87c;
   background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
   background-clip: text;
