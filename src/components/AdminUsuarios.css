@@ -1,7 +1,7 @@
 /* Estilos generales */
 .admin-container {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: black;
   color: #333; /* Agregar color de texto por defecto */
 }
 
@@ -66,8 +66,17 @@
 }
 
 .card-header {
-  padding: 20px;
-  border-bottom: 1px solid #eee;
+  font-family: "WindSong", serif;
+  font-weight: lighter;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+  color: #e8a87c;
+  background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .card-header h2 {
@@ -77,6 +86,7 @@
 
 .card-content {
   padding: 20px;
+  background-color: #f5f5f9;
 }
 
 /* Sección de login */
@@ -87,6 +97,7 @@
 
 /* Header de sección */
 .section-header {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -403,4 +414,33 @@
 
 a.portal-button {
   text-decoration: none;
+}
+
+/* Tamaños más chicos */
+@media (max-width: 768px) {
+  .card-header {
+    font-size: 3.2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-header {
+    font-size: 1.9rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-header {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .card-header {
+    font-size: 2.4rem;
+  }
+}
+
 }
