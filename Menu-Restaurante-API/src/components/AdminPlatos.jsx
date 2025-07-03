@@ -27,7 +27,7 @@ function AdminPlatos() {
     const fetchPlatos = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3001/api/platos?disponible=true", {
+        const res = await axios.get("http://localhost:3001/api/platos", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPlatos(res.data);
