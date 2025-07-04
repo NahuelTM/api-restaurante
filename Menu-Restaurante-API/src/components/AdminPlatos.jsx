@@ -115,6 +115,8 @@ function AdminPlatos() {
       setShowModal(false);
       resetEditData();
       alert("Plato agregado con éxito.");
+      const resp = await axios.get("http://localhost:3001/api/platos");
+      setPlatos(resp.data);
     } catch (error) {
       console.error("Error al agregar el plato:", error.response ? error.response.data : error.message);
       alert(`Error al agregar el plato: ${error.response && error.response.data && error.response.data.error ? error.response.data.error : error.message}. Consulta la consola para más detalles.`);
@@ -208,7 +210,7 @@ function AdminPlatos() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("¿Estás seguro de que quieres eliminar este plato?")) {
+    if (!window.confirm("¿Estás seguro de que quieres deshabilitar este plato?")) {
       return;
     }
     try {
@@ -218,13 +220,13 @@ function AdminPlatos() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert("Plato eliminado con éxito.");
+      alert("Plato deshabilitado con éxito.");
       const res = await axios.get("http://localhost:3001/api/platos");
       setPlatos(res.data);
 
     } catch (error) {
-      console.error("Error al eliminar el plato:", error.response ? error.response.data : error.message);
-      alert("Error al eliminar el plato. Por favor, intenta de nuevo.");
+      console.error("Error al deshabilitar el plato:", error.response ? error.response.data : error.message);
+      alert("Error al deshabilitar el plato. Por favor, intenta de nuevo.");
       if (error.response && error.response.status === 401) {
         handleLogout();
       }

@@ -1,12 +1,14 @@
-/* Estilos generales */
-.admin-container {
+/* AdminUsuarios.module.css - CSS Modules */
+
+/* Contenedor principal */
+.adminContainer {
   min-height: 100vh;
   background-color: black;
-  color: #333; /* Agregar color de texto por defecto */
+  color: #333;
 }
 
-.admin-container * {
-  color: inherit; /* Heredar color del contenedor padre */
+.adminContainer * {
+  color: inherit;
 }
 
 /* Navbar */
@@ -20,12 +22,22 @@
   height: 60px;
 }
 
-.nav-links {
+.menuToggle {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.navLinks {
   display: flex;
   gap: 20px;
 }
 
-.nav-links a {
+.navLinks a {
   text-decoration: none;
   color: #333;
   padding: 8px 16px;
@@ -33,32 +45,37 @@
   transition: background-color 0.2s;
 }
 
-.nav-links a:hover {
+.navLinks a:hover {
   background-color: #f0f0f0;
 }
 
-.nav-logo img {
+.navLinksOpen {
+  display: flex;
+  gap: 20px;
+}
+
+.navLogo img {
   width: 30px;
   height: 30px;
   object-fit: contain;
 }
 
 /* Contenido principal */
-.admin-content {
+.adminContent {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.admin-card {
+.adminCard {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.card-header {
-  font-family: "WindSong", serif;
+.cardHeader {
+  font-family: "Great Vibes", cursive;
   font-weight: lighter;
   font-size: 3rem;
   display: flex;
@@ -72,42 +89,24 @@
   -webkit-text-fill-color: transparent;
 }
 
-.card-header h2 {
+.cardHeader h2 {
   margin: 0;
-  color: #333; /* Asegurar que el título sea visible */
+  color: #333;
 }
 
-.login-user-info img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-.card-content {
+.cardContent {
   padding: 20px;
   background-color: #f5f5f9;
 }
 
 /* Sección de login */
-.login-section {
+.loginSection {
   text-align: center;
   padding: 40px 20px;
 }
 
-/* NAVBAR */
-.login-nav {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
-
 /* Header de sección */
-.section-header {
+.sectionHeader {
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: space-between;
@@ -115,9 +114,9 @@
   margin-bottom: 20px;
 }
 
-.section-header h3 {
+.sectionHeader h3 {
   margin: 0;
-  color: #333; /* Asegurar que el subtítulo sea visible */
+  color: #333;
 }
 
 /* Botones */
@@ -132,75 +131,91 @@
   display: inline-block;
 }
 
-.btn-primary {
+.btnPrimary {
   background-color: #007bff;
   color: white;
 }
 
-.btn-primary:hover {
+.btnPrimary:hover {
   background-color: #0056b3;
 }
 
-.btn-outline {
+.btnOutline {
   background-color: transparent;
   color: #007bff;
   border: 1px solid #007bff;
 }
 
-.btn-outline:hover {
+.btnOutline:hover {
   background-color: #007bff;
   color: white;
 }
 
-.btn-danger {
+.btnDanger {
   background-color: #dc3545;
   color: white;
 }
 
-.btn-danger:hover {
+.btnDanger:hover {
   background-color: #c82333;
 }
 
-.btn-small {
+.btnSmall {
   padding: 4px 8px;
   font-size: 12px;
 }
 
-.btn-large {
+.btnLarge {
   padding: 12px 24px;
   font-size: 16px;
 }
 
 /* Tabla */
-.table-container {
+.tableContainer {
   overflow-x: auto;
+  width: 100%;
+  display: block !important;
 }
 
-.users-table {
+.usersTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  display: table !important;
 }
 
-.users-table th,
-.users-table td {
+.usersTable th,
+.usersTable td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #eee;
+  display: table-cell !important;
 }
 
-.users-table th {
+.usersTable th {
   background-color: #f8f9fa;
   font-weight: 600;
-  color: #333; /* Texto oscuro para headers */
+  color: #333;
 }
 
-.users-table td {
-  color: #333; /* Texto oscuro para celdas */
+.usersTable td {
+  color: #333;
 }
 
-.users-table tr:hover {
+.usersTable tr {
+  display: table-row !important;
+}
+
+.usersTable tr:hover {
   background-color: #f8f9fa;
+}
+
+.usersTable thead {
+  display: table-header-group !important;
+}
+
+.usersTable tbody {
+  display: table-row-group !important;
 }
 
 /* Badges */
@@ -211,12 +226,12 @@
   font-weight: 500;
 }
 
-.badge-active {
+.badgeActive {
   background-color: #d4edda;
   color: #155724;
 }
 
-.badge-inactive {
+.badgeInactive {
   background-color: #f8d7da;
   color: #721c24;
 }
@@ -228,14 +243,14 @@
 }
 
 /* Estado vacío */
-.empty-state {
+.emptyState {
   text-align: center;
   padding: 40px 20px;
-  color: #666;
+  color: #666 !important;
 }
 
 /* Modales */
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -257,7 +272,7 @@
   overflow-y: auto;
 }
 
-.modal-header {
+.modalHeader {
   padding: 20px;
   border-bottom: 1px solid #eee;
   display: flex;
@@ -265,12 +280,12 @@
   align-items: center;
 }
 
-.modal-header h3 {
+.modalHeader h3 {
   margin: 0;
-  color: #333; /* Título del modal oscuro */
+  color: #333;
 }
 
-.modal-close {
+.modalClose {
   background: none;
   border: none;
   font-size: 18px;
@@ -278,15 +293,15 @@
   padding: 4px;
 }
 
-.modal-body {
+.modalBody {
   padding: 20px;
 }
 
-.modal-body p {
-  color: #333; /* Texto del modal oscuro */
+.modalBody p {
+  color: #333;
 }
 
-.modal-footer {
+.modalFooter {
   padding: 20px;
   border-top: 1px solid #eee;
   display: flex;
@@ -295,30 +310,30 @@
 }
 
 /* Formularios */
-.form-group {
+.formGroup {
   margin-bottom: 16px;
 }
 
-.form-group label {
+.formGroup label {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333; /* Texto oscuro para labels */
+  color: #333;
 }
 
-.form-group input,
-.form-group select {
+.formGroup input,
+.formGroup select {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
-  color: #333; /* Texto oscuro para inputs */
-  background-color: white; /* Fondo blanco para inputs */
+  color: #333;
+  background-color: white;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.formGroup input:focus,
+.formGroup select:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
@@ -337,11 +352,11 @@
   animation: slideIn 0.3s ease-out;
 }
 
-.notification.success {
+.notificationSuccess {
   background-color: #28a745;
 }
 
-.notification.error {
+.notificationError {
   background-color: #dc3545;
 }
 
@@ -356,35 +371,33 @@
   }
 }
 
+/* Asegurar legibilidad del texto */
+.adminContainer p,
+.adminContainer span,
+.adminContainer div,
+.adminContainer td,
+.adminContainer th,
+.adminContainer label,
+.adminContainer h1,
+.adminContainer h2,
+.adminContainer h3,
+.adminContainer h4,
+.adminContainer h5,
+.adminContainer h6 {
+  color: #333 !important;
+}
+
+.portalButton {
+  text-decoration: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-  /* Navbar Toggle */
-  .menu-toggle {
-    display: block;
-  }
-
-    .login-links {
-    display: none; /* Oculta los links por defecto */
-    flex-direction: column;
-    position: absolute;
-    top: 60px; /* Debajo de la navbar */
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    padding: 1rem;
-    gap: 1rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-
-  .login-links.open {
-    display: flex; /* Muestra los links cuando el menú está abierto */
-  }
-  
-  .nav-links {
+  .navLinks {
     display: none;
   }
 
-  .nav-links.open {
+  .navLinksOpen {
     display: flex;
     position: absolute;
     top: 60px;
@@ -396,104 +409,65 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .section-header {
+  .sectionHeader {
     flex-direction: column;
     gap: 10px;
     align-items: stretch;
   }
 
-  .users-table {
-    font-size: 14px;
-  }
-
-  .users-table th,
-  .users-table td {
-    padding: 8px;
-  }
-}
-
-/* Asegurar legibilidad del texto */
-.admin-container p,
-.admin-container span,
-.admin-container div,
-.admin-container td,
-.admin-container th,
-.admin-container label,
-.admin-container h1,
-.admin-container h2,
-.admin-container h3,
-.admin-container h4,
-.admin-container h5,
-.admin-container h5,
-.admin-container h6 {
-  color: #333 !important;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: #666 !important;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.login-links a {
-  text-decoration: none;
-  color: #333;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  font-size: 0.875rem;
-}
-
-.login-links a:hover {
-  background-color: #f0f0f0;
-}
-
-a.portal-button {
-  text-decoration: none;
-}
-
-/* Tamaños más chicos */
-@media (max-width: 768px) {
-  .card-header {
+  .cardHeader {
     font-size: 3.2rem;
     text-align: center;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+    width: 100%;
+    display: block !important;
+  }
+
+  .usersTable {
+    min-width: 600px;
+    font-size: 14px;
+    display: table !important;
+  }
+
+  .usersTable th,
+  .usersTable td {
+    padding: 8px;
+    white-space: nowrap;
+    display: table-cell !important;
+  }
+
+  .usersTable tr {
+    display: table-row !important;
+  }
+
+  .usersTable thead {
+    display: table-header-group !important;
+  }
+
+  .usersTable tbody {
+    display: table-row-group !important;
   }
 }
 
 @media (max-width: 576px) {
-  .card-header {
+  .cardHeader {
     font-size: 1.9rem;
     text-align: center;
   }
 }
 
 @media (max-width: 400px) {
-  .card-header {
+  .cardHeader {
     font-size: 1.6rem;
     text-align: center;
   }
-
-@media (min-width: 576px) and (max-width: 992px) {
-  .card-header {
-    font-size: 2.4rem;
-  }
 }
 
+@media (min-width: 576px) and (max-width: 992px) {
+  .cardHeader {
+    font-size: 2.4rem;
+  }
 }

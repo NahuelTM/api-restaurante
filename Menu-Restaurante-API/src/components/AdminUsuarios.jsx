@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import styles from "./AdminUsuarios.module.css"
 import { Link } from "react-router-dom"
+import styles from "./AdminUsuarios.module.css" // ✅ CSS Modules
 
 const API_URL = "http://localhost:3001/api"
 
@@ -17,36 +17,27 @@ export default function AdminUsuarios() {
   const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false)
   const [usuarioAEliminar, setUsuarioAEliminar] = useState(null)
 
-  // Cargar token del localStorage al montar el componente
   useEffect(() => {
     const tokenGuardado = localStorage.getItem("token")
-    if (tokenGuardado) {
-      setToken(tokenGuardado)
-    }
+    if (tokenGuardado) setToken(tokenGuardado)
   }, [])
 
-  // Cargar usuarios si hay token
   useEffect(() => {
-    if (token) {
-      fetchUsuarios()
-    }
+    if (token) fetchUsuarios()
   }, [token])
 
   const fetchUsuarios = async () => {
     try {
       const res = await fetch(`${API_URL}/usuarios`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` }
       })
-
       if (res.ok) {
         const data = await res.json()
         setUsuarios(data)
       } else {
         mostrarNotificacion("Token inválido o expirado", "error")
       }
-    } catch (error) {
+    } catch {
       mostrarNotificacion("Error al cargar usuarios", "error")
     }
   }
@@ -56,17 +47,18 @@ export default function AdminUsuarios() {
       mostrarNotificacion("Por favor completa todos los campos", "error")
       return
     }
-
     try {
       const res = await fetch(`${API_URL}/usuarios`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(nuevoUsuario),
+        body: JSON.stringify({
+          ...nuevoUsuario,
+          activo: Boolean(nuevoUsuario.activo) // ✅ Asegurar que sea boolean
+        })
       })
-
       if (res.ok) {
         mostrarNotificacion("Usuario agregado correctamente", "success")
         setNuevoUsuario({ nombre: "", password: "", activo: true })
@@ -75,7 +67,7 @@ export default function AdminUsuarios() {
       } else {
         mostrarNotificacion("Error al agregar usuario", "error")
       }
-    } catch (error) {
+    } catch {
       mostrarNotificacion("Error de conexión", "error")
     }
   }
@@ -85,29 +77,28 @@ export default function AdminUsuarios() {
       mostrarNotificacion("El nombre es requerido", "error")
       return
     }
-
     try {
       const res = await fetch(`${API_URL}/usuarios/${usuarioEditando.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           nombre: usuarioEditando.nombre,
-          activo: usuarioEditando.activo,
-        }),
+          activo: Boolean(usuarioEditando.activo) // ✅ Asegurar que sea boolean
+        })
       })
-
       if (res.ok) {
         mostrarNotificacion("Usuario actualizado correctamente", "success")
         setUsuarioEditando(null)
         setModalEditarAbierto(false)
         fetchUsuarios()
       } else {
-        mostrarNotificacion("Error al actualizar usuario", "error")
+        const errorData = await res.json().catch(() => null)
+        mostrarNotificacion(errorData?.message || "Error al actualizar usuario", "error")
       }
-    } catch (error) {
+    } catch {
       mostrarNotificacion("Error de conexión", "error")
     }
   }
@@ -116,11 +107,8 @@ export default function AdminUsuarios() {
     try {
       const res = await fetch(`${API_URL}/usuarios/${usuarioAEliminar.id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` }
       })
-
       if (res.ok) {
         mostrarNotificacion("Usuario eliminado correctamente", "success")
         setModalEliminarAbierto(false)
@@ -129,78 +117,59 @@ export default function AdminUsuarios() {
       } else {
         mostrarNotificacion("Error al eliminar usuario", "error")
       }
-    } catch (error) {
+    } catch {
       mostrarNotificacion("Error de conexión", "error")
     }
   }
 
   const mostrarNotificacion = (mensaje, tipo) => {
-    const notificacion = document.createElement("div")
-    notificacion.className = `notification ${tipo}`
-    notificacion.textContent = mensaje
-
-    document.body.appendChild(notificacion)
-
+    const noti = document.createElement("div")
+    noti.className = `${styles.notification} ${tipo === 'success' ? styles.notificationSuccess : styles.notificationError}`
+    noti.textContent = mensaje
+    document.body.appendChild(noti)
     setTimeout(() => {
-      if (document.body.contains(notificacion)) {
-        document.body.removeChild(notificacion)
-      }
+      if (document.body.contains(noti)) document.body.removeChild(noti)
     }, 3000)
   }
 
-  const abrirModalEditar = (usuario) => {
-    setUsuarioEditando({ ...usuario })
-    setModalEditarAbierto(true)
-  }
-
-  const abrirModalEliminar = (usuario) => {
-    setUsuarioAEliminar(usuario)
-    setModalEliminarAbierto(true)
-  }
-
   return (
-    <div className={styles["admin-container"]}>
-      <nav className={styles["login-nav"]}>
-        <button className={styles["menu-toggle"]} onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">
-          ☰
-        </button>
-        <div className={`${styles["login-links"]} ${menuAbierto ? styles.open : ""}`}>
-          <a href="/menu">Menu</a>
-          <Link to="/portal">Portal</Link>
-        </div>
-        <div className={styles["login-user-info"]}>
-          <img
-            src="src/assets/Logos/Favicon3.ico"
-            alt="Logo Niquel"
-            style={{ width: "30px", height: "30px", objectFit: "contain" }}
-          />
-        </div>
-      </nav>
+    <div className={styles.adminContainer}>
+    <nav className="login-nav">
+              <button className="menu-toggle" onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">☰</button>
+              <div className={`login-links ${menuAbierto ? "open" : ""}`}>
+                <a href="/menu" className="nav-button">Menu</a>
+                <Link to="/portal" className="nav-button">Portal</Link>
+              </div>
+              <div className="login-user-info">
+                <img src="src/assets/Logos/Favicon3.ico" alt="Logo Niquel" style={{ width: "30px", height: "30px", objectFit: "contain" }} />
+              </div>
+            </nav>
 
-      <div className={styles["admin-content"]}>
-        <div className={styles["card-header"]}><h2>Administración de Usuarios</h2></div>
-        <div className={styles["admin-card"]}>
-          <div className={styles["card-content"]}>
+      <div className={styles.adminContent}>
+        <div className={styles.cardHeader}><h2>Administración de Usuarios</h2></div>
+
+        <div className={styles.adminCard}>
+          <div className={styles.cardContent}>
             {!token ? (
-              <div className={styles["login-section"]}>
+              <div className={styles.loginSection}>
                 <p>Acceso denegado. Iniciá sesión para continuar.</p>
               </div>
             ) : (
               <>
-                <div className={styles["section-header"]}>
+                <div className={styles.sectionHeader}>
                   <h3>👤Usuarios registrados ({usuarios.length})</h3>
-                  <button className={`${styles["btn"]} ${styles["btn-primary"]}`} onClick={() => setModalAgregarAbierto(true)}>
+                  <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => setModalAgregarAbierto(true)}>
                     ➕ Agregar Usuario
                   </button>
                 </div>
 
                 {usuarios.length === 0 ? (
-                  <div className={styles["empty-state"]}>
+                  <div className={styles.emptyState}>
                     <p>No hay usuarios disponibles.</p>
                   </div>
                 ) : (
-                  <div className={styles["table-container"]}>
-                    <table className={styles["users-table"]}>
+                  <div className={styles.tableContainer}>
+                    <table className={styles.usersTable}>
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -210,31 +179,28 @@ export default function AdminUsuarios() {
                         </tr>
                       </thead>
                       <tbody>
-                        {usuarios.map((usuario) => (
-                          <tr key={usuario.id}>
-                            <td>{usuario.id}</td>
-                            <td>{usuario.nombre}</td>
-                            <td>
-                              <span className={`${styles["badge"]} ${usuario.activo ? styles["badge-active"] : styles["badge-inactive"]}`}>
-                                {usuario.activo ? "Activo" : "Inactivo"}
+                        {usuarios.map((u) => (
+                          <tr key={u.id}>
+                            <td data-label="ID">{u.id}</td>
+                            <td data-label="Nombre">{u.nombre}</td>
+                            <td data-label="Estado">
+                              <span className={`${styles.badge} ${u.activo ? styles.badgeActive : styles.badgeInactive}`}>
+                                {u.activo ? "Activo" : "Inactivo"}
                               </span>
                             </td>
-                            <td>
-                              <div className={styles["actions"]}>
-                                <button
-                                  className={`${styles["btn"]} ${styles["btn-small"]} ${styles["btn-outline"]}`}
-                                  onClick={() => abrirModalEditar(usuario)}
-                                  title="Editar"
-                                >
-                                  ✏️
-                                </button>
-                                <button
-                                  className={`${styles["btn"]} ${styles["btn-small"]} ${styles["btn-danger"]}`}
-                                  onClick={() => abrirModalEliminar(usuario)}
-                                  title="Eliminar"
-                                >
-                                  🗑️
-                                </button>
+                            <td data-label="Acciones">
+                              <div className={styles.actions}>
+                                <button className={`${styles.btn} ${styles.btnSmall} ${styles.btnOutline}`} onClick={() => {
+                                  setUsuarioEditando({
+                                    ...u,
+                                    activo: Boolean(u.activo) // ✅ Asegurar que sea boolean
+                                  })
+                                  setModalEditarAbierto(true)
+                                }}>✏️</button>
+                                <button className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`} onClick={() => {
+                                  setUsuarioAEliminar(u)
+                                  setModalEliminarAbierto(true)
+                                }}>🗑️</button>
                               </div>
                             </td>
                           </tr>
@@ -249,35 +215,27 @@ export default function AdminUsuarios() {
         </div>
       </div>
 
-      {/* MODAL AGREGAR */}
+      {/* Modales */}
       {modalAgregarAbierto && (
-        <div className={styles["modal-overlay"]} onClick={() => setModalAgregarAbierto(false)}>
-          <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
-            <div className={styles["modal-header"]}>
-              <h3>Agregar Nuevo Usuario</h3>
-              <button className={styles["modal-close"]} onClick={() => setModalAgregarAbierto(false)}>✕</button>
+        <div className={styles.modalOverlay} onClick={() => setModalAgregarAbierto(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h3>Agregar Usuario</h3>
+              <button className={styles.modalClose} onClick={() => setModalAgregarAbierto(false)}>✕</button>
             </div>
-            <div className={styles["modal-body"]}>
-              <div className={styles["form-group"]}>
+            <div className={styles.modalBody}>
+              <div className={styles.formGroup}>
                 <label>Nombre:</label>
-                <input
-                  type="text"
-                  value={nuevoUsuario.nombre}
-                  onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, nombre: e.target.value })}
-                />
+                <input type="text" value={nuevoUsuario.nombre} onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, nombre: e.target.value })} />
               </div>
-              <div className={styles["form-group"]}>
+              <div className={styles.formGroup}>
                 <label>Contraseña:</label>
-                <input
-                  type="password"
-                  value={nuevoUsuario.password}
-                  onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, password: e.target.value })}
-                />
+                <input type="password" value={nuevoUsuario.password} onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, password: e.target.value })} />
               </div>
-              <div className={styles["form-group"]}>
+              <div className={styles.formGroup}>
                 <label>Estado:</label>
-                <select
-                  value={nuevoUsuario.activo}
+                <select 
+                  value={nuevoUsuario.activo ? "true" : "false"} 
                   onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, activo: e.target.value === "true" })}
                 >
                   <option value="true">Activo</option>
@@ -285,35 +243,30 @@ export default function AdminUsuarios() {
                 </select>
               </div>
             </div>
-            <div className={styles["modal-footer"]}>
-              <button className={styles["btn-outline"]} onClick={() => setModalAgregarAbierto(false)}>Cancelar</button>
-              <button className={styles["btn-primary"]} onClick={handleAgregarUsuario}>Agregar Usuario</button>
+            <div className={styles.modalFooter}>
+              <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => setModalAgregarAbierto(false)}>Cancelar</button>
+              <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={handleAgregarUsuario}>Agregar</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* MODAL EDITAR */}
       {modalEditarAbierto && usuarioEditando && (
-        <div className={styles["modal-overlay"]} onClick={() => setModalEditarAbierto(false)}>
-          <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
-            <div className={styles["modal-header"]}>
+        <div className={styles.modalOverlay} onClick={() => setModalEditarAbierto(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
               <h3>Editar Usuario</h3>
-              <button className={styles["modal-close"]} onClick={() => setModalEditarAbierto(false)}>✕</button>
+              <button className={styles.modalClose} onClick={() => setModalEditarAbierto(false)}>✕</button>
             </div>
-            <div className={styles["modal-body"]}>
-              <div className={styles["form-group"]}>
+            <div className={styles.modalBody}>
+              <div className={styles.formGroup}>
                 <label>Nombre:</label>
-                <input
-                  type="text"
-                  value={usuarioEditando.nombre}
-                  onChange={(e) => setUsuarioEditando({ ...usuarioEditando, nombre: e.target.value })}
-                />
+                <input type="text" value={usuarioEditando.nombre} onChange={(e) => setUsuarioEditando({ ...usuarioEditando, nombre: e.target.value })} />
               </div>
-              <div className={styles["form-group"]}>
+              <div className={styles.formGroup}>
                 <label>Estado:</label>
-                <select
-                  value={usuarioEditando.activo}
+                <select 
+                  value={usuarioEditando.activo ? "true" : "false"} 
                   onChange={(e) => setUsuarioEditando({ ...usuarioEditando, activo: e.target.value === "true" })}
                 >
                   <option value="true">Activo</option>
@@ -321,29 +274,27 @@ export default function AdminUsuarios() {
                 </select>
               </div>
             </div>
-            <div className={styles["modal-footer"]}>
-              <button className={styles["btn-outline"]} onClick={() => setModalEditarAbierto(false)}>Cancelar</button>
-              <button className={styles["btn-primary"]} onClick={handleEditarUsuario}>Guardar Cambios</button>
+            <div className={styles.modalFooter}>
+              <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => setModalEditarAbierto(false)}>Cancelar</button>
+              <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={handleEditarUsuario}>Guardar</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* MODAL ELIMINAR */}
       {modalEliminarAbierto && usuarioAEliminar && (
-        <div className={styles["modal-overlay"]} onClick={() => setModalEliminarAbierto(false)}>
-          <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
-            <div className={styles["modal-header"]}>
-              <h3>Confirmar Eliminación</h3>
-              <button className={styles["modal-close"]} onClick={() => setModalEliminarAbierto(false)}>✕</button>
+        <div className={styles.modalOverlay} onClick={() => setModalEliminarAbierto(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h3>Eliminar Usuario</h3>
+              <button className={styles.modalClose} onClick={() => setModalEliminarAbierto(false)}>✕</button>
             </div>
-            <div className={styles["modal-body"]}>
-              <p>¿Estás seguro de que deseas eliminar al usuario <strong>{usuarioAEliminar.nombre}</strong>?</p>
-              <p>Esta acción no se puede deshacer.</p>
+            <div className={styles.modalBody}>
+              <p>¿Estás seguro de desactivar al usuario <strong>{usuarioAEliminar.nombre}</strong>?</p>
             </div>
-            <div className={styles["modal-footer"]}>
-              <button className={styles["btn-outline"]} onClick={() => setModalEliminarAbierto(false)}>Cancelar</button>
-              <button className={styles["btn-danger"]} onClick={handleEliminarUsuario}>Eliminar</button>
+            <div className={styles.modalFooter}>
+              <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => setModalEliminarAbierto(false)}>Cancelar</button>
+              <button className={`${styles.btn} ${styles.btnDanger}`} onClick={handleEliminarUsuario}>Eliminar</button>
             </div>
           </div>
         </div>
