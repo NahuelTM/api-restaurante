@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import "./AdminUsuarios.css"
+import styles from "./AdminUsuarios.module.css"
 import { Link } from "react-router-dom"
 
 const API_URL = "http://localhost:3001/api"
@@ -17,28 +17,21 @@ export default function AdminUsuarios() {
   const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false)
   const [usuarioAEliminar, setUsuarioAEliminar] = useState(null)
 
-  // Login automático con usuario admin
-  const handleLogin = async () => {
-    try {
-      const res = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre: "admin", password: "admin123" }),
-      })
-
-      const data = await res.json()
-      if (res.ok) {
-        setToken(data.token)
-        mostrarNotificacion("Sesión iniciada correctamente", "success")
-      } else {
-        mostrarNotificacion("Error al iniciar sesión", "error")
-      }
-    } catch (error) {
-      mostrarNotificacion("Error de conexión", "error")
+  // Cargar token del localStorage al montar el componente
+  useEffect(() => {
+    const tokenGuardado = localStorage.getItem("token")
+    if (tokenGuardado) {
+      setToken(tokenGuardado)
     }
-  }
+  }, [])
 
-  // Obtener usuarios desde la API
+  // Cargar usuarios si hay token
+  useEffect(() => {
+    if (token) {
+      fetchUsuarios()
+    }
+  }, [token])
+
   const fetchUsuarios = async () => {
     try {
       const res = await fetch(`${API_URL}/usuarios`, {
@@ -50,13 +43,14 @@ export default function AdminUsuarios() {
       if (res.ok) {
         const data = await res.json()
         setUsuarios(data)
+      } else {
+        mostrarNotificacion("Token inválido o expirado", "error")
       }
     } catch (error) {
       mostrarNotificacion("Error al cargar usuarios", "error")
     }
   }
 
-  // Agregar nuevo usuario
   const handleAgregarUsuario = async () => {
     if (!nuevoUsuario.nombre || !nuevoUsuario.password) {
       mostrarNotificacion("Por favor completa todos los campos", "error")
@@ -86,7 +80,6 @@ export default function AdminUsuarios() {
     }
   }
 
-  // Editar usuario
   const handleEditarUsuario = async () => {
     if (!usuarioEditando.nombre) {
       mostrarNotificacion("El nombre es requerido", "error")
@@ -119,7 +112,6 @@ export default function AdminUsuarios() {
     }
   }
 
-  // Eliminar usuario
   const handleEliminarUsuario = async () => {
     try {
       const res = await fetch(`${API_URL}/usuarios/${usuarioAEliminar.id}`, {
@@ -142,17 +134,13 @@ export default function AdminUsuarios() {
     }
   }
 
-  // Función para mostrar notificaciones
   const mostrarNotificacion = (mensaje, tipo) => {
-    // Crear elemento de notificación
     const notificacion = document.createElement("div")
     notificacion.className = `notification ${tipo}`
     notificacion.textContent = mensaje
 
-    // Agregar al DOM
     document.body.appendChild(notificacion)
 
-    // Remover después de 3 segundos
     setTimeout(() => {
       if (document.body.contains(notificacion)) {
         document.body.removeChild(notificacion)
@@ -170,68 +158,49 @@ export default function AdminUsuarios() {
     setModalEliminarAbierto(true)
   }
 
-  useEffect(() => {
-    if (token) {
-      fetchUsuarios()
-    }
-  }, [token])
-
   return (
-    <div className="admin-container">
-      {/* NAVBAR actualizado */}
-      <nav className="login-nav">
-        <button className="menu-toggle" onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">
+    <div className={styles["admin-container"]}>
+      <nav className={styles["login-nav"]}>
+        <button className={styles["menu-toggle"]} onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">
           ☰
         </button>
-
-        <div className={`login-links ${menuAbierto ? "open" : ""}`}>
+        <div className={`${styles["login-links"]} ${menuAbierto ? styles.open : ""}`}>
           <a href="/menu">Menu</a>
           <Link to="/portal">Portal</Link>
         </div>
-
-        <div className="login-user-info">
+        <div className={styles["login-user-info"]}>
           <img
             src="src/assets/Logos/Favicon3.ico"
             alt="Logo Niquel"
-            style={{
-              width: "30px",
-              height: "30px",
-              objectFit: "contain",
-            }}
+            style={{ width: "30px", height: "30px", objectFit: "contain" }}
           />
         </div>
       </nav>
 
-      {/* CONTENIDO ADMIN */}
-      <div className="admin-content">
-         <div className="card-header"><h2> Administración de Usuarios</h2></div>
-        <div className="admin-card">
-
-          <div className="card-content">
+      <div className={styles["admin-content"]}>
+        <div className={styles["card-header"]}><h2>Administración de Usuarios</h2></div>
+        <div className={styles["admin-card"]}>
+          <div className={styles["card-content"]}>
             {!token ? (
-              <div className="login-section">
-                <button onClick={handleLogin} className="btn btn-primary btn-large">
-                  Iniciar sesión como admin
-                </button>
+              <div className={styles["login-section"]}>
+                <p>Acceso denegado. Iniciá sesión para continuar.</p>
               </div>
             ) : (
               <>
-                {/* HEADER CON BOTONES */}
-                <div className="section-header">
+                <div className={styles["section-header"]}>
                   <h3>👤Usuarios registrados ({usuarios.length})</h3>
-                  <button className="btn btn-primary" onClick={() => setModalAgregarAbierto(true)}>
+                  <button className={`${styles["btn"]} ${styles["btn-primary"]}`} onClick={() => setModalAgregarAbierto(true)}>
                     ➕ Agregar Usuario
                   </button>
                 </div>
 
-                {/* TABLA DE USUARIOS */}
                 {usuarios.length === 0 ? (
-                  <div className="empty-state">
+                  <div className={styles["empty-state"]}>
                     <p>No hay usuarios disponibles.</p>
                   </div>
                 ) : (
-                  <div className="table-container">
-                    <table className="users-table">
+                  <div className={styles["table-container"]}>
+                    <table className={styles["users-table"]}>
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -246,21 +215,21 @@ export default function AdminUsuarios() {
                             <td>{usuario.id}</td>
                             <td>{usuario.nombre}</td>
                             <td>
-                              <span className={`badge ${usuario.activo ? "badge-active" : "badge-inactive"}`}>
+                              <span className={`${styles["badge"]} ${usuario.activo ? styles["badge-active"] : styles["badge-inactive"]}`}>
                                 {usuario.activo ? "Activo" : "Inactivo"}
                               </span>
                             </td>
                             <td>
-                              <div className="actions">
+                              <div className={styles["actions"]}>
                                 <button
-                                  className="btn btn-small btn-outline"
+                                  className={`${styles["btn"]} ${styles["btn-small"]} ${styles["btn-outline"]}`}
                                   onClick={() => abrirModalEditar(usuario)}
                                   title="Editar"
                                 >
                                   ✏️
                                 </button>
                                 <button
-                                  className="btn btn-small btn-danger"
+                                  className={`${styles["btn"]} ${styles["btn-small"]} ${styles["btn-danger"]}`}
                                   onClick={() => abrirModalEliminar(usuario)}
                                   title="Eliminar"
                                 >
@@ -280,70 +249,60 @@ export default function AdminUsuarios() {
         </div>
       </div>
 
-      {/* MODAL AGREGAR USUARIO */}
+      {/* MODAL AGREGAR */}
       {modalAgregarAbierto && (
-        <div className="modal-overlay" onClick={() => setModalAgregarAbierto(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
+        <div className={styles["modal-overlay"]} onClick={() => setModalAgregarAbierto(false)}>
+          <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
+            <div className={styles["modal-header"]}>
               <h3>Agregar Nuevo Usuario</h3>
-              <button className="modal-close" onClick={() => setModalAgregarAbierto(false)}>
-                ✕
-              </button>
+              <button className={styles["modal-close"]} onClick={() => setModalAgregarAbierto(false)}>✕</button>
             </div>
-            <div className="modal-body">
-              <div className="form-group">
+            <div className={styles["modal-body"]}>
+              <div className={styles["form-group"]}>
                 <label>Nombre:</label>
                 <input
                   type="text"
                   value={nuevoUsuario.nombre}
                   onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, nombre: e.target.value })}
-                  placeholder="Nombre del usuario"
                 />
               </div>
-              <div className="form-group">
+              <div className={styles["form-group"]}>
                 <label>Contraseña:</label>
                 <input
                   type="password"
                   value={nuevoUsuario.password}
                   onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, password: e.target.value })}
-                  placeholder="Contraseña"
                 />
               </div>
-              <div className="form-group">
+              <div className={styles["form-group"]}>
                 <label>Estado:</label>
                 <select
                   value={nuevoUsuario.activo}
                   onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, activo: e.target.value === "true" })}
                 >
-                  <option value={true}>Activo</option>
-                  <option value={false}>Inactivo</option>
+                  <option value="true">Activo</option>
+                  <option value="false">Inactivo</option>
                 </select>
               </div>
             </div>
-            <div className="modal-footer">
-              <button className="btn btn-outline" onClick={() => setModalAgregarAbierto(false)}>
-                Cancelar
-              </button>
-              <button className="btn btn-primary" onClick={handleAgregarUsuario}>
-                Agregar Usuario
-              </button>
+            <div className={styles["modal-footer"]}>
+              <button className={styles["btn-outline"]} onClick={() => setModalAgregarAbierto(false)}>Cancelar</button>
+              <button className={styles["btn-primary"]} onClick={handleAgregarUsuario}>Agregar Usuario</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* MODAL EDITAR USUARIO */}
+      {/* MODAL EDITAR */}
       {modalEditarAbierto && usuarioEditando && (
-        <div className="modal-overlay" onClick={() => setModalEditarAbierto(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
+        <div className={styles["modal-overlay"]} onClick={() => setModalEditarAbierto(false)}>
+          <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
+            <div className={styles["modal-header"]}>
               <h3>Editar Usuario</h3>
-              <button className="modal-close" onClick={() => setModalEditarAbierto(false)}>
-                ✕
-              </button>
+              <button className={styles["modal-close"]} onClick={() => setModalEditarAbierto(false)}>✕</button>
             </div>
-            <div className="modal-body">
-              <div className="form-group">
+            <div className={styles["modal-body"]}>
+              <div className={styles["form-group"]}>
                 <label>Nombre:</label>
                 <input
                   type="text"
@@ -351,52 +310,40 @@ export default function AdminUsuarios() {
                   onChange={(e) => setUsuarioEditando({ ...usuarioEditando, nombre: e.target.value })}
                 />
               </div>
-              <div className="form-group">
+              <div className={styles["form-group"]}>
                 <label>Estado:</label>
                 <select
                   value={usuarioEditando.activo}
                   onChange={(e) => setUsuarioEditando({ ...usuarioEditando, activo: e.target.value === "true" })}
                 >
-                  <option value={true}>Activo</option>
-                  <option value={false}>Inactivo</option>
+                  <option value="true">Activo</option>
+                  <option value="false">Inactivo</option>
                 </select>
               </div>
             </div>
-            <div className="modal-footer">
-              <button className="btn btn-outline" onClick={() => setModalEditarAbierto(false)}>
-                Cancelar
-              </button>
-              <button className="btn btn-primary" onClick={handleEditarUsuario}>
-                Guardar Cambios
-              </button>
+            <div className={styles["modal-footer"]}>
+              <button className={styles["btn-outline"]} onClick={() => setModalEditarAbierto(false)}>Cancelar</button>
+              <button className={styles["btn-primary"]} onClick={handleEditarUsuario}>Guardar Cambios</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* MODAL ELIMINAR USUARIO */}
+      {/* MODAL ELIMINAR */}
       {modalEliminarAbierto && usuarioAEliminar && (
-        <div className="modal-overlay" onClick={() => setModalEliminarAbierto(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
+        <div className={styles["modal-overlay"]} onClick={() => setModalEliminarAbierto(false)}>
+          <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
+            <div className={styles["modal-header"]}>
               <h3>Confirmar Eliminación</h3>
-              <button className="modal-close" onClick={() => setModalEliminarAbierto(false)}>
-                ✕
-              </button>
+              <button className={styles["modal-close"]} onClick={() => setModalEliminarAbierto(false)}>✕</button>
             </div>
-            <div className="modal-body">
-              <p>
-                ¿Estás seguro de que deseas eliminar al usuario <strong>{usuarioAEliminar.nombre}</strong>?
-              </p>
+            <div className={styles["modal-body"]}>
+              <p>¿Estás seguro de que deseas eliminar al usuario <strong>{usuarioAEliminar.nombre}</strong>?</p>
               <p>Esta acción no se puede deshacer.</p>
             </div>
-            <div className="modal-footer">
-              <button className="btn btn-outline" onClick={() => setModalEliminarAbierto(false)}>
-                Cancelar
-              </button>
-              <button className="btn btn-danger" onClick={handleEliminarUsuario}>
-                Eliminar
-              </button>
+            <div className={styles["modal-footer"]}>
+              <button className={styles["btn-outline"]} onClick={() => setModalEliminarAbierto(false)}>Cancelar</button>
+              <button className={styles["btn-danger"]} onClick={handleEliminarUsuario}>Eliminar</button>
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Importa useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AdminPlatos.css";
+import "./AdminUsuarios.css";
 
 function AdminPlatos() {
   const [platos, setPlatos] = useState([]);
@@ -15,43 +16,38 @@ function AdminPlatos() {
     categoria: "",
     subcategoria: "",
     precio: "",
-    imagen: "", // Esto guardará la URL o Base64
-    imagenFile: null, // Esto guardará el objeto File
+    disponible: "",
+    imagen: "",
+    imagenFile: null,
   });
   const [showModal, setShowModal] = useState(false);
+  const [accesoDenegado, setAccesoDenegado] = useState(false);
 
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate();
 
-  // Cargar platos desde la base de datos
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setAccesoDenegado(true);
+      return;
+    }
     const fetchPlatos = async () => {
       try {
-        const token = localStorage.getItem("token");
         const res = await axios.get("http://localhost:3001/api/platos", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPlatos(res.data);
       } catch (error) {
-        console.error("Error al obtener platos:", error);
-        // Si hay un error de autenticación (ej. token expirado), redirige al login
         if (error.response && error.response.status === 401) {
-          handleLogout();
+          setAccesoDenegado(true);
+        } else {
+          console.error("Error al obtener platos:", error);
         }
       }
     };
     fetchPlatos();
   }, []);
 
-  const convertirArchivoABase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const lector = new FileReader();
-      lector.onloadend = () => resolve(lector.result);
-      lector.onerror = reject;
-      lector.readAsDataURL(file);
-    });
-  };
-
-  // Función para resetear el estado de editData a valores iniciales vacíos
   const resetEditData = () => {
     setEditData({
       nombre: "",
@@ -60,6 +56,7 @@ function AdminPlatos() {
       categoria: "",
       subcategoria: "",
       precio: "",
+      disponible: "",
       imagen: "",
       imagenFile: null,
     });
@@ -70,31 +67,27 @@ function AdminPlatos() {
       const token = localStorage.getItem("token");
       let platoDataToSave = { ...editData };
 
-      // Validar que los campos obligatorios no estén vacíos antes de enviar
       if (!platoDataToSave.nombre || !platoDataToSave.precio || !platoDataToSave.categoria) {
         alert("Por favor, completa al menos el Nombre, Precio y Categoría.");
-        return; // Detiene la ejecución si faltan datos
+        return;
       }
 
-      // NO enviar la imagen en el POST inicial del plato
-      // Elimina imagen y imagenFile de los datos a enviar inicialmente
       const { imagen, imagenFile, ...platoDataWithoutImage } = platoDataToSave;
 
       const res = await axios.post(
         "http://localhost:3001/api/platos",
-        platoDataWithoutImage, // Envía el plato sin la imagen
+        platoDataWithoutImage,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      const nuevoPlatoId = res.data.id; // Asume que tu backend devuelve el ID del plato creado
-      let finalImagenUrl = "https://via.placeholder.com/150?text=Sin+Imagen"; // Imagen por defecto
+      const nuevoPlatoId = res.data.id;
+      let finalImagenUrl = "https://via.placeholder.com/150?text=Sin+Imagen";
 
-      // Si hay una imagen seleccionada, subirla por separado
       if (editData.imagenFile) {
         const formData = new FormData();
-        formData.append("foto", editData.imagenFile); // El nombre del campo debe ser 'foto'
+        formData.append("foto", editData.imagenFile);
 
         const imageUploadRes = await axios.post(
           `http://localhost:3001/api/platos/${nuevoPlatoId}/imagen`,
@@ -106,31 +99,39 @@ function AdminPlatos() {
             },
           }
         );
-        finalImagenUrl = imageUploadRes.data.url; // Obtiene la URL de la imagen subida desde la respuesta del backend
+        finalImagenUrl = imageUploadRes.data.url;
       }
 
-      // Agrega el nuevo plato a la lista con la URL de imagen correcta
       setPlatos((prev) => [...prev, { ...res.data, imagen: finalImagenUrl }]);
       setShowModal(false);
-      resetEditData(); // Limpiar el estado después de agregar
+      resetEditData();
       alert("Plato agregado con éxito.");
     } catch (error) {
       console.error("Error al agregar el plato:", error.response ? error.response.data : error.message);
       alert(`Error al agregar el plato: ${error.response && error.response.data && error.response.data.error ? error.response.data.error : error.message}. Consulta la consola para más detalles.`);
       if (error.response && error.response.status === 401) {
-        handleLogout();
+        setAccesoDenegado(true);
       }
     }
   };
 
   const handleEditClick = (plato) => {
     setEditandoId(plato.id);
-    setEditData({ ...plato, imagenFile: null }); // Limpiar imagenFile al editar para que no intente subir el anterior
+    setEditData({ ...plato, imagenFile: null });
   };
 
   const handleCancel = () => {
     setEditandoId(null);
-    resetEditData(); // Resetear editData
+    resetEditData();
+  };
+
+  const convertirArchivoABase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const lector = new FileReader();
+      lector.onloadend = () => resolve(lector.result);
+      lector.onerror = reject;
+      lector.readAsDataURL(file);
+    });
   };
 
   const handleChange = async (e) => {
@@ -148,18 +149,16 @@ function AdminPlatos() {
     try {
       const token = localStorage.getItem("token");
 
-      // Validar que los campos obligatorios no estén vacíos al guardar
       if (!editData.nombre || !editData.precio || !editData.categoria) {
         alert("Por favor, completa al menos el Nombre, Precio y Categoría.");
         return;
       }
 
-      let updatedImageUrl = editData.imagen; // Mantener la imagen actual por defecto
+      let updatedImageUrl = editData.imagen;
 
-      // Si hay una nueva imagen seleccionada para actualizar (editData.imagenFile existe)
       if (editData.imagenFile) {
         const formData = new FormData();
-        formData.append("foto", editData.imagenFile); // El nombre del campo debe coincidir con lo que espera tu backend ('foto')
+        formData.append("foto", editData.imagenFile);
 
         const imageRes = await axios.post(
           `http://localhost:3001/api/platos/${id}/imagen`,
@@ -171,19 +170,16 @@ function AdminPlatos() {
             },
           }
         );
-        updatedImageUrl = imageRes.data.url; // Obtiene la nueva URL de la imagen desde el backend
+        updatedImageUrl = imageRes.data.url;
       }
 
-      // Prepara los datos del plato para la actualización (sin imagenFile, pero con la URL de imagen actualizada)
       const { imagenFile, ...restData } = editData;
       const platoDataToUpdate = { ...restData, imagen: updatedImageUrl };
 
-      // Envía los datos del plato (texto)
       await axios.put(`http://localhost:3001/api/platos/${id}`, platoDataToUpdate, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // Actualizar la lista de platos en el estado local después de guardar
       setPlatos((prev) =>
         prev.map((plato) =>
           plato.id === id ? { ...plato, ...platoDataToUpdate } : plato
@@ -191,30 +187,33 @@ function AdminPlatos() {
       );
 
       setEditandoId(null);
-      resetEditData(); // Limpiar editData después de guardar
+      resetEditData();
       alert("Plato actualizado con éxito.");
     } catch (error) {
       console.error("Error al actualizar el plato:", error.response ? error.response.data : error.message);
       alert(`Error al actualizar el plato: ${error.response && error.response.data && error.response.data.error ? error.response.data.error : error.message}. Consulta la consola para más detalles.`);
       if (error.response && error.response.status === 401) {
-        handleLogout();
+        setAccesoDenegado(true);
       }
     }
   };
 
-  const handleDelete = async (id) => {
+const handleDelete = async (id) => {
     if (!window.confirm("¿Estás seguro de que quieres eliminar este plato?")) {
       return;
     }
     try {
       const token = localStorage.getItem("token");
-
+ 
       await axios.delete(`http://localhost:3001/api/platos/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      setPlatos((prev) => prev.filter((p) => p.id !== id));
+ 
       alert("Plato eliminado con éxito.");
+      // *** ESTA ES LA LÍNEA MODIFICADA ***
+      const res = await axios.get("http://localhost:3001/api/platos");
+      setPlatos(res.data);
+ 
     } catch (error) {
       console.error("Error al eliminar el plato:", error.response ? error.response.data : error.message);
       alert("Error al eliminar el plato. Por favor, intenta de nuevo.");
@@ -225,13 +224,55 @@ function AdminPlatos() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Elimina el token del almacenamiento local
-    navigate("/login"); // Redirige al usuario a la página de inicio de sesión
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   const platosFiltrados = platos.filter((plato) =>
     plato && plato.nombre && plato.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
+
+if (accesoDenegado) {
+  return (
+    <div className="admin-container">
+      <nav className="login-nav">
+        <button className="menu-toggle" onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">☰</button>
+        <div className={`login-links ${menuAbierto ? "open" : ""}`}>
+          <a href="/menu" className="nav-button">Menu</a>
+          <Link to="/portal" className="nav-button">Portal</Link>
+        </div>
+        <div className="login-user-info">
+          <img src="src/assets/Logos/Favicon3.ico" alt="Logo Niquel" style={{ width: "30px", height: "30px", objectFit: "contain" }} />
+        </div>
+      </nav>
+      <main className="admin-content">
+        <div className="admin-header">
+          <h2 className="admin-title">Administración de Platos</h2>
+          <div className="admin-divider"></div>
+        </div>
+        <div
+          className="empty-state"
+          style={{
+            textAlign: "center",
+            marginTop: "2rem",
+            fontSize: "1.2rem",
+            color: "#c00",
+            background: "#fff",
+            borderRadius: "10px",
+            width: "100vw",
+            maxWidth: "100vw",
+            padding: "40px 20px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+          }}
+        >
+          Acceso denegado. Iniciá sesión para continuar.
+        </div>
+      </main>
+    </div>
+  );
+}
 
   return (
     <div className="admin-container">
@@ -240,7 +281,6 @@ function AdminPlatos() {
         <div className={`login-links ${menuAbierto ? "open" : ""}`}>
           <a href="/menu" className="nav-button">Menu</a>
           <Link to="/portal" className="nav-button">Portal</Link>
-          {/* BOTÓN CERRAR SESIÓN ELIMINADO */}
         </div>
         <div className="login-user-info">
           <img src="src/assets/Logos/Favicon3.ico" alt="Logo Niquel" style={{ width: "30px", height: "30px", objectFit: "contain" }} />
@@ -314,12 +354,19 @@ function AdminPlatos() {
                 onChange={handleChange}
               />
               <input
+                type="text"
+                name="disponible"
+                placeholder="Disponible"
+                value={editData.disponible || ""}
+                onChange={handleChange}
+              />
+              <input
                 type="file"
                 name="imagen"
                 accept="image/*"
                 onChange={handleChange}
               />
-              {editData.imagen && ( // Previsualización de la imagen al agregar
+              {editData.imagen && (
                 <img src={editData.imagen} alt="Previsualización" style={{ maxWidth: '100px', maxHeight: '100px', marginTop: '10px', display: 'block' }} />
               )}
               <div className="modal-actions">
@@ -330,7 +377,7 @@ function AdminPlatos() {
           </div>
         )}
 
-        {/* Cards de platos (visibles solo en pantallas pequeñas con CSS) */}
+        {/* Cards de platos */}
         <div className="plato-cards">
           {platosFiltrados.length > 0 ? (
             platosFiltrados.map((plato) => (
@@ -385,6 +432,13 @@ function AdminPlatos() {
                   ) : (
                     plato.descripcion
                   )}
+                  <br />
+                  <strong>Disponible:</strong>{" "}
+                  {editandoId === plato.id ? (
+                    <input type="text" name="disponible" value={editData.disponible || ""} onChange={handleChange} />
+                  ) : (
+                    plato.disponible
+                  )}
                 </div>
                 <div className="plato-actions">
                   {editandoId === plato.id ? (
@@ -406,7 +460,7 @@ function AdminPlatos() {
           )}
         </div>
 
-        {/* Tabla de platos (visible solo en pantallas grandes con CSS) */}
+        {/* Tabla de platos */}
         <div className="table-container">
           <table className="admin-table">
             <thead>
@@ -418,6 +472,7 @@ function AdminPlatos() {
                 <th>Categoría</th>
                 <th>Subcategoría</th>
                 <th>Precio</th>
+                <th>Disponible</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -461,6 +516,18 @@ function AdminPlatos() {
                     ))}
                     <td>
                       {editandoId === plato.id ? (
+                        <input
+                          type="text"
+                          name="disponible"
+                          value={editData.disponible || ""}
+                          onChange={handleChange}
+                        />
+                      ) : (
+                        plato.disponible
+                      )}
+                    </td>
+                    <td>
+                      {editandoId === plato.id ? (
                         <>
                           <button className="edit-btn" onClick={() => handleSave(plato.id)}>💾</button>
                           <button className="delete-btn" onClick={handleCancel}>✖️</button>
@@ -476,7 +543,7 @@ function AdminPlatos() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="empty-state">No hay platos para mostrar.</td>
+                  <td colSpan="9" className="empty-state">No hay platos para mostrar.</td>
                 </tr>
               )}
             </tbody>

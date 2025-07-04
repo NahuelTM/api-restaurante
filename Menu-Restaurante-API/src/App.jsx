@@ -18,19 +18,25 @@ function App() {
       <Routes>
         {/* Ruta de login */}
         <Route path="/login" element={<Login onLogin={() => setLogueado(true)} />} />
+        
+        {/* Menu */}
+        <Route path="/" element={<HomePage />} />
 
-        {/* Ruta protegida: si está logueado muestra HomePage, si no redirige */}
+        {/* Ruta protegida: si está logueado muestra portal, si no redirige */}
         <Route
-          path="/"
-          element={logueado ? <HomePage /> : <Navigate to="/login" />}
+          path="/portal"
+          element={logueado ? <PortalEmpleados /> : <Navigate to="/login" />}
         />
 
-        {/* Portal de empleados */}
-        <Route path="/portal" element={<PortalEmpleados />} />
+        <Route
+          path="/admin-usuarios"
+          element={logueado ? <AdminUsuarios /> : <Navigate to="/login" />}
+        />
 
-        {/* Nuevas páginas de administración */}
-        <Route path="/admin-usuarios" element={<AdminUsuarios />} />
-        <Route path="/admin-platos" element={<AdminPlatos />} />
+        <Route
+          path="/admin-platos"
+          element={logueado ? <AdminPlatos /> : <Navigate to="/login" />}
+        />
 
         {/* Redirección por defecto */}
         <Route path="*" element={<Navigate to="/" />} />

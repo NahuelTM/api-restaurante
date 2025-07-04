@@ -18,7 +18,11 @@ import { useEffect } from "react"
 
   const navigate = useNavigate()
 
-  
+    useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/portal");
+    }
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault()
