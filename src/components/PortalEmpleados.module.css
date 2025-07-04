@@ -1,0 +1,306 @@
+@import url("https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=WindSong&display=swap");
+@import url('https://fonts.cdnfonts.com/css/chillax');
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Great+Vibes&family=Tangerine:wght@400;700&display=swap');
+
+/* CONTAINER */
+.portal-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.portal-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* NAVBAR */
+.portal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+}
+
+.menu-toggle {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.portal-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-button {
+ background: none;
+  border: none;
+  color: #000;
+  font-family: 'Chillax', sans-serif;
+  font-size: 0.875rem;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0;
+  text-align: center;
+}
+
+.nav-button:hover {
+  color: #fb923c;
+}
+
+.logout-button {
+  font-family: 'Chillax', sans-serif;
+  font-size: 0.875rem;
+  color: #000;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  display: inline-block;
+}
+
+.logout-button:hover {
+  color: #fb923c;
+}
+
+
+
+
+
+.header-login-link {
+  color: #fb923c !important;
+}
+
+.portal-user-info {
+  display: flex;
+  align-items: center;
+}
+
+
+/* BRAND */
+.portal-brand {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.portal-brand h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin: 0;
+  color: #fff;
+}
+
+/* MAIN CONTENT */
+.portal-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+}
+
+.portal-content {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.portal-title {
+  font-family: "Great Vibes", cursive;
+  font-weight: lighter;
+  margin: 0;
+  margin-bottom: -2.3rem;
+  color: #e8a87c;
+  font-size: 5.7rem;
+  margin: 0 0 3rem 0;
+  background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.portal-subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0 0 3rem 0;
+  font-weight: 300;
+}
+
+.portal-divider {
+  width: 300px;
+  height: 1px;
+  background-color: #fb923c;
+  margin: 0 auto 3rem auto;
+}
+
+/* BUTTONS */
+.portal-buttons {
+  font-family: 'Chillax', sans-serif;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.portal-button {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 280px;
+  font-family: 'Chillax', sans-serif;
+}
+
+.portal-button-primary {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #fff;
+}
+
+.portal-button-primary:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.portal-button-secondary {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.portal-button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* BACK BUTTON */
+.portal-back {
+  margin-top: 2rem;
+}
+
+.portal-back-button {
+  background: none;
+  border: 1px solid #fb923c;
+  color: #fb923c;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.portal-back-button:hover {
+  background-color: #fb923c;
+  color: #000;
+}
+
+a.portal-button {
+  text-decoration: none;
+}
+
+/* Visibilidad por tipo de pantalla */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: inline-block;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .portal-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .portal-links.open {
+    display: flex;
+  }
+
+  .portal-title {
+    font-size: 2.5rem;
+  }
+
+  .portal-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .portal-buttons {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .portal-button {
+    min-width: 250px;
+  }
+
+  .portal-divider {
+    width: 200px;
+  }
+
+  .mobile-only {
+    display: inline-block;
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    color: #fff;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .portal-title {
+    font-size: 3.5rem;
+  }
+
+  .portal-button {
+    min-width: 200px;
+    padding: 0.875rem 2rem;
+    font-size: 0.875rem;
+  }
+}
