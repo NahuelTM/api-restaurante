@@ -1,0 +1,473 @@
+/* AdminUsuarios.module.css - CSS Modules */
+
+/* Contenedor principal */
+.adminContainer {
+  min-height: 100vh;
+  background-color: black;
+  color: #333;
+}
+
+.adminContainer * {
+  color: inherit;
+}
+
+/* Navbar */
+.navbar {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.menuToggle {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.navLinks a:hover {
+  background-color: #f0f0f0;
+}
+
+.navLinksOpen {
+  display: flex;
+  gap: 20px;
+}
+
+.navLogo img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* Contenido principal */
+.adminContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.adminCard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cardHeader {
+  font-family: "Great Vibes", cursive;
+  font-weight: lighter;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  color: #e8a87c;
+  background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cardHeader h2 {
+  margin: 0;
+  color: #333;
+}
+
+.cardContent {
+  padding: 20px;
+  background-color: #f5f5f9;
+}
+
+/* Sección de login */
+.loginSection {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Header de sección */
+.sectionHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sectionHeader h3 {
+  margin: 0;
+  color: #333;
+}
+
+/* Botones */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btnPrimary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.btnOutline {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btnOutline:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnDanger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btnDanger:hover {
+  background-color: #c82333;
+}
+
+.btnSmall {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.btnLarge {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+/* Tabla */
+.tableContainer {
+  overflow-x: auto;
+  width: 100%;
+  display: block !important;
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  display: table !important;
+}
+
+.usersTable th,
+.usersTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  display: table-cell !important;
+}
+
+.usersTable th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.usersTable td {
+  color: #333;
+}
+
+.usersTable tr {
+  display: table-row !important;
+}
+
+.usersTable tr:hover {
+  background-color: #f8f9fa;
+}
+
+.usersTable thead {
+  display: table-header-group !important;
+}
+
+.usersTable tbody {
+  display: table-row-group !important;
+}
+
+/* Badges */
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badgeActive {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badgeInactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Acciones */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Estado vacío */
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666 !important;
+}
+
+/* Modales */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  color: #333;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modalBody {
+  padding: 20px;
+}
+
+.modalBody p {
+  color: #333;
+}
+
+.modalFooter {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Formularios */
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background-color: white;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Notificaciones */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  z-index: 1001;
+  animation: slideIn 0.3s ease-out;
+}
+
+.notificationSuccess {
+  background-color: #28a745;
+}
+
+.notificationError {
+  background-color: #dc3545;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Asegurar legibilidad del texto */
+.adminContainer p,
+.adminContainer span,
+.adminContainer div,
+.adminContainer td,
+.adminContainer th,
+.adminContainer label,
+.adminContainer h1,
+.adminContainer h2,
+.adminContainer h3,
+.adminContainer h4,
+.adminContainer h5,
+.adminContainer h6 {
+  color: #333 !important;
+}
+
+.portalButton {
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+
+  .navLinksOpen {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .cardHeader {
+    font-size: 3.2rem;
+    text-align: center;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+    width: 100%;
+    display: block !important;
+  }
+
+  .usersTable {
+    min-width: 600px;
+    font-size: 14px;
+    display: table !important;
+  }
+
+  .usersTable th,
+  .usersTable td {
+    padding: 8px;
+    white-space: nowrap;
+    display: table-cell !important;
+  }
+
+  .usersTable tr {
+    display: table-row !important;
+  }
+
+  .usersTable thead {
+    display: table-header-group !important;
+  }
+
+  .usersTable tbody {
+    display: table-row-group !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .cardHeader {
+    font-size: 1.9rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .cardHeader {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .cardHeader {
+    font-size: 2.4rem;
+  }
+}

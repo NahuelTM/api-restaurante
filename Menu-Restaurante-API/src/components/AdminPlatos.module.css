@@ -1,0 +1,424 @@
+@import url("https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700&display=swap");
+
+.admin-container {
+  min-height: 100vh;
+  font-family: 'Chillax', sans-serif;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.login-nav {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.login-links a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  font-size: 0.875rem;
+}
+
+.login-links a:hover {
+  background-color: #f0f0f0;
+}
+
+.login-user-info img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* CONTENIDO PRINCIPAL */
+.admin-content {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-title {
+  font-family: "Great Vibes", cursive; /* Asegúrate de que esta fuente esté importada si la usas */
+  font-size: 5.7rem;
+  font-weight: lighter;
+  margin: 0 auto 0 auto;
+  background: linear-gradient(to right, #ca652d, #e89454, #feb473, #e4884f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-subtitle {
+  font-family: 'Chillax', sans-serif;
+  font-size: 1.7rem;
+  color: #ffffff !important;
+  margin-top: -0.2rem;
+  margin-bottom: 0.4rem;
+  text-decoration: none !important;
+  display: block;
+}
+
+.admin-container p.admin-subtitle {
+  color: #ffffff !important;
+}
+
+.admin-divider {
+  width: 600px;
+  height: 1px;
+  background-color: #fb923c;
+  margin: 0 auto 3rem auto;
+}
+
+/* BUSCADOR */
+.buscador-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.buscador-input {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 25px;
+  width: 320px;
+  outline: none;
+  transition: border-color 0.3s;
+  font-family: 'Chillax', sans-serif;
+}
+
+.buscador-input::placeholder {
+  color: #ccc;
+}
+
+.buscador-input:focus {
+  border-color: #fb923c;
+}
+
+/* Botón para agregar plato */
+.add-plato-btn {
+  background-color: #fb923c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+  display: block; /* Para centrarlo si es necesario o darle su propio flujo */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-plato-btn:hover {
+  background-color: #e88c2c;
+}
+
+/* Modal para agregar plato */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Chillax, sans-serif;
+  z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.modal-heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex; /* Para organizar mejor los inputs */
+  flex-direction: column;
+  gap: 10px; /* Espacio entre inputs */
+  font-family: 'Chillax', sans-serif;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content input[type="file"],
+.modal-content textarea {
+  width: calc(100% - 20px); /* Ajustar por padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Chillax', sans-serif;
+  font-size: 1rem;
+}
+
+.modal-content textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  background-color: #fb923c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.modal-actions button:hover {
+  background-color: #e88c2c;
+}
+
+/* Estilos compartidos para botones de acción en tabla y cards */
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.edit-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.delete-btn:hover {
+  background-color: #ffe0e0;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 20px 0;
+}
+
+
+/* --- SECCIÓN DE RESPONSIVIDAD --- */
+
+/* Por defecto, la tabla se muestra en pantallas grandes */
+.table-container {
+  overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  display: block; /* Muestra la tabla por defecto */
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Ayuda a que las columnas no se desborden */
+  word-wrap: break-word;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eaeaea;
+  text-align: left;
+  word-break: break-word; /* Rompe palabras largas */
+  vertical-align: top;
+}
+
+.admin-table input[type="text"],
+.admin-table input[type="number"],
+.admin-table textarea,
+.admin-table input[type="file"] {
+  width: calc(100% - 10px); /* Ajustar por padding */
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: 'Chillax', sans-serif;
+  font-size: 0.9rem;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.admin-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.admin-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.plato-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Las cards están ocultas por defecto en pantallas grandes */
+.plato-cards {
+  display: none;
+}
+
+
+/* MEDIA QUERIES para dispositivos móviles (hasta 768px) */
+@media (max-width: 768px) {
+  /* Navbar Toggle */
+  .menu-toggle {
+    display: block;
+  }
+
+  .login-links {
+    display: none; /* Oculta los links por defecto */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Debajo de la navbar */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 1rem;
+    gap: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .login-links.open {
+    display: flex; /* Muestra los links cuando el menú está abierto */
+  }
+
+  /* Ajustes de tipografía para móviles */
+  .admin-title {
+    font-size: 2.5rem;
+  }
+
+  .admin-subtitle {
+    font-size: 1.1rem;
+  }
+
+  /* Ajustes para el buscador y el divisor */
+  .buscador-input {
+    width: 90%;
+  }
+
+  .admin-divider {
+    width: 90%;
+  }
+
+  /* Ocultar la tabla y mostrar las cards en móviles */
+  .table-container {
+    display: none;
+  }
+
+  .plato-cards {
+    display: flex; /* Muestra las cards en móviles */
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 0; /* Padding para las cards en móviles */
+  }
+
+  .plato-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: #000;
+    font-size: 0.95rem;
+  }
+
+  .plato-card img {
+    width: 100%;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .plato-card .plato-info {
+    margin-bottom: 0.5rem;
+  }
+
+  .plato-card .plato-info strong {
+    display: inline-block;
+    width: 100px;
+    font-weight: 600;
+  }
+
+  .plato-card .plato-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  /* Estilos para inputs dentro de las cards al editar */
+  .plato-card input[type="text"],
+  .plato-card input[type="number"],
+  .plato-card textarea,
+  .plato-card input[type="file"] {
+    width: calc(100% - 10px); /* Ajustar por padding */
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Incluye padding y border en el width */
+  }
+
+  .plato-card textarea {
+    resize: vertical;
+  }
+}
