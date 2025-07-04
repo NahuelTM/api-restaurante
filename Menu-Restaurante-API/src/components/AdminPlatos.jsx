@@ -22,6 +22,9 @@ function AdminPlatos() {
   });
   const [showModal, setShowModal] = useState(false);
   const [accesoDenegado, setAccesoDenegado] = useState(false);
+  // Nuevos estados para el modal de imagen
+  const [showFullImageModal, setShowFullImageModal] = useState(false);
+  const [fullImageUrl, setFullImageUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -64,32 +67,32 @@ function AdminPlatos() {
 
   const handleAddPlato = async () => {
     try {
-    const token = localStorage.getItem("token");
-    let platoDataToSave = { ...editData };
+      const token = localStorage.getItem("token");
+      let platoDataToSave = { ...editData };
 
-    // Si subcategoria está vacío, envía null
-    if (platoDataToSave.subcategoria === "" || platoDataToSave.subcategoria === undefined) {
-      platoDataToSave.subcategoria = "General";
-    }
-    // Si disponible está vacío, envía "1"
-    if (!platoDataToSave.disponible) {
-      platoDataToSave.disponible = "1";
-    }
-
-    if (!platoDataToSave.nombre || !platoDataToSave.precio || !platoDataToSave.categoria) {
-      alert("Por favor, completa al menos el Nombre, Precio y Categoría.");
-      return;
-    }
-
-    const { imagen, imagenFile, ...platoDataWithoutImage } = platoDataToSave;
-
-    const res = await axios.post(
-      "http://localhost:3001/api/platos",
-      platoDataWithoutImage,
-      {
-        headers: { Authorization: `Bearer ${token}` },
+      // Si subcategoria está vacío, envía null
+      if (platoDataToSave.subcategoria === "" || platoDataToSave.subcategoria === undefined) {
+        platoDataToSave.subcategoria = "General";
       }
-    );
+      // Si disponible está vacío, envía "1"
+      if (!platoDataToSave.disponible) {
+        platoDataToSave.disponible = "1";
+      }
+
+      if (!platoDataToSave.nombre || !platoDataToSave.precio || !platoDataToSave.categoria) {
+      alert("Por favor, completa al menos el Nombre, Precio y Categoría.");
+        return;
+      }
+
+      const { imagen, imagenFile, ...platoDataWithoutImage } = platoDataToSave;
+
+      const res = await axios.post(
+        "http://localhost:3001/api/platos",
+        platoDataWithoutImage,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       const nuevoPlatoId = res.data.id;
       let finalImagenUrl = "https://via.placeholder.com/150?text=Sin+Imagen";
@@ -236,6 +239,12 @@ function AdminPlatos() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  // Nueva función para manejar el clic en la imagen
+  const handleImageClick = (imageUrl) => {
+    setFullImageUrl(imageUrl);
+    setShowFullImageModal(true);
   };
 
   const platosFiltrados = platos.filter((plato) =>
@@ -407,7 +416,13 @@ function AdminPlatos() {
                     )}
                   </>
                 ) : (
-                  <img src={plato.imagen} alt={plato.nombre} />
+                  // Añadido onClick para mostrar la imagen completa
+                  <img
+                    src={plato.imagen}
+                    alt={plato.nombre}
+                    onClick={() => handleImageClick(plato.imagen)}
+                    style={{ cursor: 'pointer' }} // Añade un cursor de puntero para indicar que es clicable
+                  />
                 )}
                 <div className="plato-info">
                   <strong>Nombre:</strong>{" "}
@@ -496,7 +511,14 @@ function AdminPlatos() {
                       {editandoId === plato.id && editData.imagen ? (
                         <img src={editData.imagen} alt="Previsualización" className="plato-img" />
                       ) : (
-                        <img src={plato.imagen} alt={plato.nombre} className="plato-img" />
+                        // Añadido onClick para mostrar la imagen completa
+                        <img
+                          src={plato.imagen}
+                          alt={plato.nombre}
+                          className="plato-img"
+                          onClick={() => handleImageClick(plato.imagen)}
+                          style={{ cursor: 'pointer' }} // Añade un cursor de puntero para indicar que es clicable
+                        />
                       )}
                       {editandoId === plato.id && (
                         <input
@@ -562,6 +584,16 @@ function AdminPlatos() {
           </table>
         </div>
       </main>
+
+      {/* Modal para ver imagen completa */}
+      {showFullImageModal && (
+        <div className="full-image-modal-overlay" onClick={() => setShowFullImageModal(false)}>
+          <div className="full-image-modal-content" onClick={e => e.stopPropagation()}>
+            <img src={fullImageUrl} alt="Vista completa" className="full-image" />
+            <button className="close-full-image-modal" onClick={() => setShowFullImageModal(false)}>✖️</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
