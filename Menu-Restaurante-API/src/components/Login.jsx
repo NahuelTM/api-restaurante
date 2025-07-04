@@ -153,7 +153,7 @@ import { useEffect } from "react"
             <h3>¿Querés reservar una mesa o tenés alguna duda?</h3>
             <p>
               Si deseas reservar una mesa o tenés alguna consulta, nuestro equipo estará encantado de asistirte
-              personalmente. Podés comunicarte con nosotros a través de +110203020 | y te responderemos a la brevedad.
+              personalmente. Podés comunicarte con nosotros a través de +54 11 2345-6789 y te responderemos a la brevedad.
               Será un placer recibirte.
             </p>
           </div>
