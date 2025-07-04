@@ -14,9 +14,9 @@ function AdminPlatos() {
     descripcion: "",
     alergenos: "",
     categoria: "",
-    subcategoria: "",
+    subcategoria: "General",
     precio: "",
-    disponible: "",
+    disponible: "1",
     imagen: "",
     imagenFile: null,
   });
@@ -54,9 +54,9 @@ function AdminPlatos() {
       descripcion: "",
       alergenos: "",
       categoria: "",
-      subcategoria: "",
+      subcategoria: "General",
       precio: "",
-      disponible: "",
+      disponible: "1",
       imagen: "",
       imagenFile: null,
     });
@@ -64,23 +64,32 @@ function AdminPlatos() {
 
   const handleAddPlato = async () => {
     try {
-      const token = localStorage.getItem("token");
-      let platoDataToSave = { ...editData };
+    const token = localStorage.getItem("token");
+    let platoDataToSave = { ...editData };
 
-      if (!platoDataToSave.nombre || !platoDataToSave.precio || !platoDataToSave.categoria) {
-        alert("Por favor, completa al menos el Nombre, Precio y Categoría.");
-        return;
+    // Si subcategoria está vacío, envía null
+    if (platoDataToSave.subcategoria === "" || platoDataToSave.subcategoria === undefined) {
+      platoDataToSave.subcategoria = "General";
+    }
+    // Si disponible está vacío, envía "1"
+    if (!platoDataToSave.disponible) {
+      platoDataToSave.disponible = "1";
+    }
+
+    if (!platoDataToSave.nombre || !platoDataToSave.precio || !platoDataToSave.categoria) {
+      alert("Por favor, completa al menos el Nombre, Precio y Categoría.");
+      return;
+    }
+
+    const { imagen, imagenFile, ...platoDataWithoutImage } = platoDataToSave;
+
+    const res = await axios.post(
+      "http://localhost:3001/api/platos",
+      platoDataWithoutImage,
+      {
+        headers: { Authorization: `Bearer ${token}` },
       }
-
-      const { imagen, imagenFile, ...platoDataWithoutImage } = platoDataToSave;
-
-      const res = await axios.post(
-        "http://localhost:3001/api/platos",
-        platoDataWithoutImage,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+    );
 
       const nuevoPlatoId = res.data.id;
       let finalImagenUrl = "https://via.placeholder.com/150?text=Sin+Imagen";
@@ -198,22 +207,21 @@ function AdminPlatos() {
     }
   };
 
-const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("¿Estás seguro de que quieres eliminar este plato?")) {
       return;
     }
     try {
       const token = localStorage.getItem("token");
- 
+
       await axios.delete(`http://localhost:3001/api/platos/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
- 
+
       alert("Plato eliminado con éxito.");
-      // *** ESTA ES LA LÍNEA MODIFICADA ***
       const res = await axios.get("http://localhost:3001/api/platos");
       setPlatos(res.data);
- 
+
     } catch (error) {
       console.error("Error al eliminar el plato:", error.response ? error.response.data : error.message);
       alert("Error al eliminar el plato. Por favor, intenta de nuevo.");
@@ -232,47 +240,47 @@ const handleDelete = async (id) => {
     plato && plato.nombre && plato.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
 
-if (accesoDenegado) {
-  return (
-    <div className="admin-container">
-      <nav className="login-nav">
-        <button className="menu-toggle" onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">☰</button>
-        <div className={`login-links ${menuAbierto ? "open" : ""}`}>
-          <a href="/menu" className="nav-button">Menu</a>
-          <Link to="/portal" className="nav-button">Portal</Link>
-        </div>
-        <div className="login-user-info">
-          <img src="src/assets/Logos/Favicon3.ico" alt="Logo Niquel" style={{ width: "30px", height: "30px", objectFit: "contain" }} />
-        </div>
-      </nav>
-      <main className="admin-content">
-        <div className="admin-header">
-          <h2 className="admin-title">Administración de Platos</h2>
-          <div className="admin-divider"></div>
-        </div>
-        <div
-          className="empty-state"
-          style={{
-            textAlign: "center",
-            marginTop: "2rem",
-            fontSize: "1.2rem",
-            color: "#c00",
-            background: "#fff",
-            borderRadius: "10px",
-            width: "100vw",
-            maxWidth: "100vw",
-            padding: "40px 20px",
-            marginLeft: "auto",
-            marginRight: "auto",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
-          }}
-        >
-          Acceso denegado. Iniciá sesión para continuar.
-        </div>
-      </main>
-    </div>
-  );
-}
+  if (accesoDenegado) {
+    return (
+      <div className="admin-container">
+        <nav className="login-nav">
+          <button className="menu-toggle" onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Menú">☰</button>
+          <div className={`login-links ${menuAbierto ? "open" : ""}`}>
+            <a href="/menu" className="nav-button">Menu</a>
+            <Link to="/portal" className="nav-button">Portal</Link>
+          </div>
+          <div className="login-user-info">
+            <img src="src/assets/Logos/Favicon3.ico" alt="Logo Niquel" style={{ width: "30px", height: "30px", objectFit: "contain" }} />
+          </div>
+        </nav>
+        <main className="admin-content">
+          <div className="admin-header">
+            <h2 className="admin-title">Administración de Platos</h2>
+            <div className="admin-divider"></div>
+          </div>
+          <div
+            className="empty-state"
+            style={{
+              textAlign: "center",
+              marginTop: "2rem",
+              fontSize: "1.2rem",
+              color: "#c00",
+              background: "#fff",
+              borderRadius: "10px",
+              width: "100vw",
+              maxWidth: "100vw",
+              padding: "40px 20px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+            }}
+          >
+            Acceso denegado. Iniciá sesión para continuar.
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-container">
@@ -308,70 +316,72 @@ if (accesoDenegado) {
 
         {/* Modal para agregar un plato */}
         {showModal && (
-          <div className="modal">
-            <div className="modal-content">
-              <h3 className="modal-heading">Agregar Plato</h3>
-              <input
-                type="text"
-                name="nombre"
-                placeholder="Nombre del plato *"
-                value={editData.nombre || ""}
-                onChange={handleChange}
-              />
-              <textarea
-                name="descripcion"
-                placeholder="Descripción"
-                value={editData.descripcion || ""}
-                onChange={handleChange}
-                rows="3"
-              />
-              <input
-                type="text"
-                name="alergenos"
-                placeholder="Alérgenos"
-                value={editData.alergenos || ""}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="categoria"
-                placeholder="Categoría *"
-                value={editData.categoria || ""}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="subcategoria"
-                placeholder="Subcategoría"
-                value={editData.subcategoria || ""}
-                onChange={handleChange}
-              />
-              <input
-                type="number"
-                name="precio"
-                placeholder="Precio *"
-                value={editData.precio || ""}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="disponible"
-                placeholder="Disponible"
-                value={editData.disponible || ""}
-                onChange={handleChange}
-              />
-              <input
-                type="file"
-                name="imagen"
-                accept="image/*"
-                onChange={handleChange}
-              />
-              {editData.imagen && (
-                <img src={editData.imagen} alt="Previsualización" style={{ maxWidth: '100px', maxHeight: '100px', marginTop: '10px', display: 'block' }} />
-              )}
-              <div className="modal-actions">
-                <button onClick={handleAddPlato}>Guardar</button>
-                <button onClick={() => { setShowModal(false); resetEditData(); }}>Cancelar</button>
+          <div className="modal-overlay" onClick={() => { setShowModal(false); resetEditData(); }}>
+            <div className="modal" onClick={e => e.stopPropagation()}>
+              <div className="modal-content">
+                <h3 className="modal-heading">Agregar Plato</h3>
+                <input
+                  type="text"
+                  name="nombre"
+                  placeholder="Nombre del plato *"
+                  value={editData.nombre || ""}
+                  onChange={handleChange}
+                />
+                <textarea
+                  name="descripcion"
+                  placeholder="Descripción"
+                  value={editData.descripcion || ""}
+                  onChange={handleChange}
+                  rows="3"
+                />
+                <input
+                  type="text"
+                  name="alergenos"
+                  placeholder="Alérgenos"
+                  value={editData.alergenos || ""}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  name="categoria"
+                  placeholder="Categoría *"
+                  value={editData.categoria || ""}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  name="subcategoria"
+                  placeholder="Subcategoría"
+                  value={editData.subcategoria || ""}
+                  onChange={handleChange}
+                />
+                <input
+                  type="number"
+                  name="precio"
+                  placeholder="Precio *"
+                  value={editData.precio || ""}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  name="disponible"
+                  placeholder="Disponible"
+                  value={editData.disponible || ""}
+                  onChange={handleChange}
+                />
+                <input
+                  type="file"
+                  name="imagen"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+                {editData.imagen && (
+                  <img src={editData.imagen} alt="Previsualización" style={{ maxWidth: '100px', maxHeight: '100px', marginTop: '10px', display: 'block' }} />
+                )}
+                <div className="modal-actions">
+                  <button onClick={handleAddPlato}>Guardar</button>
+                  <button onClick={() => { setShowModal(false); resetEditData(); }}>Cancelar</button>
+                </div>
               </div>
             </div>
           </div>
