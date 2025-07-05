@@ -148,6 +148,7 @@ textarea {
   cursor: pointer;
   margin-bottom: 20px;
   font-size: 1.2rem;
+  font-family: 'Chillax', sans-serif;
   transition: background-color 0.3s;
   display: block; /* Para centrarlo si es necesario o darle su propio flujo */
   margin-left: auto;
@@ -165,6 +166,7 @@ textarea {
   z-index: 1000;
   display: flex;
   align-items: center;
+  padding: 10px 20px;
   justify-content: center;
 }
 
@@ -276,18 +278,26 @@ textarea {
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* Ayuda a que las columnas no se desborden */
-  word-wrap: break-word;
+  table-layout: auto;
 }
+
 
 .admin-table th,
 .admin-table td {
   padding: 12px;
   border-bottom: 1px solid #eaeaea;
   text-align: left;
-  word-break: break-word; /* Rompe palabras largas */
+  word-break: break-word; /* Rompe palabras largas en las celdas de datos */
   vertical-align: top;
 }
+
+.admin-table th {
+  white-space: nowrap; /* Evita el salto de línea */
+  min-width: 120px; /* Ancho mínimo para los encabezados */
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
 
 .admin-table input[type="text"],
 .admin-table input[type="number"],
@@ -303,10 +313,6 @@ textarea {
   border-radius: 4px;
 }
 
-.admin-table th {
-  background-color: #f0f0f0;
-  font-weight: bold;
-}
 
 .admin-table tr:hover {
   background-color: #f9f9f9;
@@ -325,8 +331,8 @@ textarea {
 }
 
 
-/* MEDIA QUERIES para dispositivos móviles (hasta 768px) */
-@media (max-width: 768px) {
+/* MEDIA QUERIES para dispositivos móviles (hasta 1158px) */
+@media (max-width: 1158px) {
   /* Navbar Toggle */
   .menu-toggle {
     display: block;
@@ -404,6 +410,7 @@ textarea {
     display: inline-block;
     width: 100px;
     font-weight: 600;
+    margin-right: 5px; /* Añadido para separar el título del valor */
   }
 
   .plato-card .plato-actions {
@@ -431,4 +438,55 @@ textarea {
   .plato-card textarea {
     resize: vertical;
   }
+}
+
+/* Estilos para el modal de imagen completa */
+.full-image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+  z-index: 2000; /* Asegura que esté por encima de todo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-image-modal-content {
+  position: relative;
+  max-width: 90%; /* Ancho máximo para la imagen */
+  max-height: 90%; /* Altura máxima para la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Asegura que la imagen se vea completa sin recortar */
+  border-radius: 8px;
+}
+
+.close-full-image-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.close-full-image-modal:hover {
+  background: rgba(255, 255, 255, 1);
 }
